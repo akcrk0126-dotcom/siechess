@@ -31,6 +31,7 @@
      설정 전에도 레슨, 퍼즐, 봇 대전, 스트릭, 꾸미기는 이 기기에서 동작합니다.
   ============================================================
 -->
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('siechess_theme')||'dark'}catch(e){document.documentElement.dataset.theme='dark'}</script>
 <style>
 :root{
   --sky:#3fa9f5; --sky-d:#1c84cf; --sky-l:#e9f5fe; --sky-ll:#f3f9fe;
@@ -732,7 +733,7 @@ table.stand{width:100%;border-collapse:collapse;font-size:13.5px}table.stand th{
 .porx .fr-aurora{animation:aur 5s linear infinite}
 @keyframes aur{to{filter:hue-rotate(360deg)}}
 .rtag{display:inline-block;font-size:11.5px;font-weight:750;color:#fff;padding:2px 8px;border-radius:7px;vertical-align:1px}
-.pt{width:44px;height:50px;border-radius:9px;overflow:hidden;flex:none;box-shadow:0 1px 3px rgba(13,25,38,.18)}
+.pbar .pt{width:44px;height:50px;border-radius:9px;overflow:hidden;flex:none;box-shadow:0 1px 3px rgba(13,25,38,.18)}
 .pt .porx{width:100%;height:100%;aspect-ratio:auto;border-radius:0}
 .pbar.big .pt{width:54px;height:61px}
 .pt{transition:box-shadow .25s}
@@ -814,6 +815,69 @@ table.stand{width:100%;border-collapse:collapse;font-size:13.5px}table.stand th{
 .gr-acts .btn.line{background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.25)}
 code{background:var(--sf2);padding:1px 6px;border-radius:5px;font-size:12.5px;color:var(--sky-d)}
 ol.steps{padding-left:20px;color:var(--tx2);font-size:14px;line-height:1.8;margin-top:10px}
+/* ===== PREMIUM DARK THEME ===== */
+html[data-theme=dark]{
+  --bg:#0a0f1c; --sf:#121a2b; --sf2:#1a2438; --ln:#233049; --ln2:#2e3d5a;
+  --tx:#edf2fa; --tx2:#a3b0c4; --tx3:#67768e;
+  --sky:#4cb3ff; --sky-d:#7cc8ff; --sky-l:#13304d; --sky-ll:#0f2238;
+  --win:#22c37a; --win-l:#0d2e21; --lose:#ff5d66; --lose-l:#3a161b;
+  --bg2:#1a2438; color-scheme:dark;
+}
+html[data-theme=dark] body{background:radial-gradient(1200px 600px at 50% -200px,#1b2d55 0%,transparent 60%),radial-gradient(800px 500px at 110% 110%,#2a1747 0%,transparent 55%),#0a0f1c}
+html[data-theme=dark] .screen{background:transparent}
+html[data-theme=dark] .card{background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.015)),var(--sf);border-color:rgba(255,255,255,.07);box-shadow:0 1px 0 rgba(255,255,255,.05) inset,0 12px 30px -14px rgba(0,0,0,.6)}
+html[data-theme=dark] .card.tap:active{background:var(--sf2)}
+html[data-theme=dark] .nav{background:rgba(14,20,34,.72);border-top:1px solid rgba(255,255,255,.06);box-shadow:0 -10px 30px rgba(0,0,0,.35)}
+html[data-theme=dark] .nav button.on{color:#fff}
+html[data-theme=dark] .nav button.on svg{filter:drop-shadow(0 0 8px rgba(76,179,255,.8));stroke:var(--sky)}
+html[data-theme=dark] .btn{background:var(--sf2);box-shadow:0 1px 0 rgba(255,255,255,.06) inset}
+html[data-theme=dark] .btn.pri{background:linear-gradient(180deg,#5cc0ff,#2f8fe0);color:#fff;box-shadow:0 1px 0 rgba(255,255,255,.35) inset,0 8px 20px -6px rgba(60,160,255,.6)}
+html[data-theme=dark] .btn.green{background:linear-gradient(180deg,#2fd68a,#139b5c);box-shadow:0 1px 0 rgba(255,255,255,.3) inset,0 8px 20px -6px rgba(30,200,120,.5)}
+html[data-theme=dark] .btn.line{background:transparent;border-color:var(--ln2)}
+html[data-theme=dark] input,html[data-theme=dark] select,html[data-theme=dark] textarea{background:var(--sf2)!important;border-color:var(--ln2)!important;color:var(--tx)!important}
+html[data-theme=dark] .say,html[data-theme=dark] .say::before{background:#1e2a42;color:var(--tx)}
+html[data-theme=dark] .sw-t::after{background:#e9eef7}
+html[data-theme=dark] .dmb.on{background:linear-gradient(90deg,#12304f,#3a2c10)}
+html[data-theme=dark] .sthumb,html[data-theme=dark] .sthumb.gb{background:linear-gradient(160deg,#1a2540,#0f1729)}
+html[data-theme=dark] .card.pzhero{background:linear-gradient(140deg,color-mix(in srgb,var(--rc) 30%,#121a2b),#121a2b 70%)}
+html[data-theme=dark] .pzmap{background:linear-gradient(180deg,#0f1a2e,#0b1322)}
+html[data-theme=dark] .pzdelta em.dn,html[data-theme=dark] .chk3{background:#3a161b}
+html[data-theme=dark] .pzdots i{background:#26334c}
+html[data-theme=dark] .socic{background:linear-gradient(145deg,color-mix(in srgb,var(--sc,#3fa9f5) 80%,#fff 8%),color-mix(in srgb,var(--sc,#3fa9f5) 70%,#000))}
+html[data-theme=dark] .clubrow.big{background:linear-gradient(110deg,#13284a,#121a2b)}
+html[data-theme=dark] .card.clubhero{background:linear-gradient(140deg,color-mix(in srgb,var(--cc) 28%,#121a2b),#121a2b 70%)}
+html[data-theme=dark] .card.tourhero{background:linear-gradient(130deg,#3a2510,#121a2b 70%)}
+html[data-theme=dark] .card.tchamp,html[data-theme=dark] .card.passcard,html[data-theme=dark] .cnode.boss{background:linear-gradient(120deg,#3b2e0c,#121a2b 70%)}
+html[data-theme=dark] .evbar,html[data-theme=dark] .evbar.flip i{background:#e9eef6}
+html[data-theme=dark] .land-feats div{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:var(--tx)}
+html[data-theme=dark] .hh-go{background:#fff;color:#0a0f1c}
+html[data-theme=dark] .sqcard{background:linear-gradient(180deg,#132541,#121a2b 60%)}
+html[data-theme=dark] .card.camphero{background:linear-gradient(130deg,#2a1a4d,#121a2b 70%)}
+html[data-theme=dark] .cnode.done{background:color-mix(in srgb,var(--cc) 22%,#121a2b)}
+html[data-theme=dark] .cstar-list div.on{background:#3b2e0c}
+html[data-theme=dark] .pt.on{background:linear-gradient(180deg,#33280f,#121a2b)}
+html[data-theme=dark] .mg{background:linear-gradient(150deg,color-mix(in srgb,var(--mc) 85%,#fff 15%),color-mix(in srgb,var(--mc) 70%,#000));box-shadow:0 1px 0 rgba(255,255,255,.25) inset,0 14px 28px -12px color-mix(in srgb,var(--mc) 80%,transparent)}
+html[data-theme=dark] .crgrid>div{background:rgba(255,255,255,.04)}
+html[data-theme=dark] .modal,html[data-theme=dark] .sheet{background:#141d30!important;color:var(--tx)}
+html[data-theme=dark] .seg{background:var(--sf2)}
+html[data-theme=dark] .seg button.on{background:var(--sf);color:var(--tx);box-shadow:0 2px 8px rgba(0,0,0,.4)}
+html[data-theme=dark] .opt{background:var(--sf2)}
+html[data-theme=dark] ::-webkit-scrollbar{width:0;height:0}
+/* refined type */
+.card h3,.sec-t{letter-spacing:-.02em}
+/* custom icons */
+.ic3{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em}
+.mg-e .ic3{width:34px;height:34px;filter:drop-shadow(0 4px 6px rgba(0,0,0,.35))}
+.mg-e{display:block;line-height:0;margin-bottom:8px}
+html[data-theme=dark] #scrGame.hasbg .pbar,html[data-theme=dark] #scrGame.hasbg .mvrow,html[data-theme=dark] #scrGame.hasbg .ghead .t,html[data-theme=dark] #scrGame.hasbg .ghead .iconbtn,html[data-theme=dark] #cPrev.hasbg #cPrevAv{background:rgba(12,18,32,.78);color:var(--tx)}
+html[data-theme=dark] .toast{background:#1f2b45;color:#fff}
+
+.mg-e{width:46px;height:46px;border-radius:14px;display:grid!important;place-items:center;background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(255,255,255,.78));box-shadow:0 1px 0 #fff inset,0 6px 14px rgba(0,0,0,.25);margin-bottom:10px}
+.mg-e .ic3{width:30px!important;height:30px!important;filter:none}
+html[data-theme=dark] .moves .m.cur{background:var(--sky);color:#fff}
+html[data-theme=dark] .bwrap{filter:drop-shadow(0 18px 30px rgba(0,0,0,.55))}
+html[data-theme=dark] .bwrap::after{box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),0 0 0 1px rgba(0,0,0,.5)}
+html[data-theme=dark] .pt.on{border-color:#d9a92a;box-shadow:0 0 18px -4px rgba(245,190,60,.5)}
 </style>
 </head>
 <body>
@@ -3021,7 +3085,7 @@ function homeHero(){
   const b=recBot(),h=new Date().getHours(),hi=h<6?'아직 안 잤어?':h<12?'좋은 아침':h<18?'안녕':'좋은 저녁';
   return `<div class="hhero"><div class="hh-bg"></div><div class="grow" style="position:relative"><div class="hh-hi">${hi}, ${esc(me.name)}!</div><div class="hh-sub">${(me.games||0)+(me.wins||0)?'오늘도 한 판 어때?':'첫 판을 둬볼 시간이야'}</div>
     <button class="btn hh-go" onclick="quickPlay()">▶ 바로 한 판 <span>vs ${b.name} ${b.elo}</span></button>
-    <div class="hh-row"><button onclick="rushPick()">⚡ 퍼즐 러시</button><button onclick="campOpen()">🏰 원정</button><button onclick="openPzRoad()">퍼즐 로드</button><button onclick="openGacha()">보물상자${freeReady()?' <i class="nb">무료</i>':''}</button></div></div>
+    <div class="hh-row"><button onclick="rushPick()">${ic3('bolt',16)} 퍼즐 러시</button><button onclick="campOpen()">${ic3('castle',16)} 원정</button><button onclick="openPzRoad()">퍼즐 로드</button><button onclick="openGacha()">보물상자${freeReady()?' <i class="nb">무료</i>':''}</button></div></div>
     <div class="hh-por" onclick="openThrone()">${portraitSVG(porOf(me),'por')}</div></div>`}
 
 /* 온보딩 */
@@ -3033,7 +3097,7 @@ function onbRender(){
   const el=$('#onb'),st=ONB.step;const dots=`<div class="ob-dots">${[0,1,2,3].map(i=>`<i class="${i===st?'on':i<st?'done':''}"></i>`).join('')}</div>`;
   let h='';
   if(st===0)h=`<div class="ob-hero"><div class="ob-logo">${pieceSVG('N','royalset')}</div><h1>환영해, ${esc(me.name)}!</h1><p>여기선 학교 친구들이랑 진짜로 겨뤄.<br>이기면 레이팅이 오르고, 리그가 오르고, 왕이 화려해져.</p>
-    <div class="ob-feats"><div><b>⚔️</b><span>친구와<br>랭킹전</span></div><div><b>🧩</b><span>퍼즐<br>로드</span></div><div><b>👑</b><span>나만의<br>왕 꾸미기</span></div><div><b>🏆</b><span>클럽 ·<br>토너먼트</span></div></div></div>
+    <div class="ob-feats"><div><b>${ic3('swords',30)}</b><span>친구와<br>랭킹전</span></div><div><b>${ic3('puzzle',30)}</b><span>퍼즐<br>로드</span></div><div><b>${ic3('crown',30)}</b><span>나만의<br>왕 꾸미기</span></div><div><b>${ic3('trophy',30)}</b><span>클럽 ·<br>토너먼트</span></div></div></div>
     <button class="btn pri ob-next" onclick="ONB.step=1;onbRender()">시작하기</button>`;
   else if(st===1)h=`<h2>체스, 얼마나 해봤어?</h2><p class="ob-p">실력에 맞는 상대랑 퍼즐을 골라줄게.</p>
     <div class="ob-opts">${[['new','🌱','처음이에요','말 움직이는 법부터 알려줘'],['some','♟️','조금 알아요','규칙은 알고, 가끔 둬봤어'],['good','🔥','자신 있어요','강한 상대로 바로 붙자']].map(([k,e,t,d])=>`<button class="${ONB.lvl===k?'on':''}" onclick="ONB.lvl='${k}';onbRender()"><span class="ob-e">${e}</span><div><b>${t}</b><small>${d}</small></div></button>`).join('')}</div>
@@ -3130,7 +3194,7 @@ function renderCamp(){
   const S=campStages(),tot=S.reduce((a,s)=>a+campStars(s.id),0);let unlocked=true;
   $('#sBody').innerHTML=`<div class="card camphero"><div class="grow"><b style="font-size:18px">왕국 원정</b><div class="faint" style="margin-top:2px">봇들의 영토를 하나씩 정복하자. 별 3개: 승리 · 수 제한 안에 승리 · 무르기 없이 승리</div></div><div class="campstar"><b class="num">${tot}</b><span>/ ${S.length*3} ★</span></div></div>
    ${CAMP_CH.map((ch,c)=>{const st=S.filter(s=>s.c===c);return `<div class="campch" style="--cc:${ch[1]}"><div class="cch-h">${botAv(BOTS[c])}<div class="grow"><b>${c+1}장 · ${ch[0]}</b><div class="faint">${st.reduce((a,s)=>a+campStars(s.id),0)} / 9 ★</div></div></div>
-     <div class="cnodes">${st.map(s=>{const lk=!unlocked;const k=campStars(s.id);unlocked=unlocked&&k>0;return `<button class="cnode ${lk?'lk':''} ${k?'done':''} ${s.boss?'boss':''}" data-st="${s.id}" ${lk?'disabled':''}><div class="cn-n">${s.boss?'👑':s.s+1}</div><div class="cn-t">${esc(s.name)}</div><div class="cn-s">${[1,2,3].map(i=>`<i class="${i<=k?'on':''}">★</i>`).join('')}</div></button>`}).join('')}</div></div>`}).join('')}`;
+     <div class="cnodes">${st.map(s=>{const lk=!unlocked;const k=campStars(s.id);unlocked=unlocked&&k>0;return `<button class="cnode ${lk?'lk':''} ${k?'done':''} ${s.boss?'boss':''}" data-st="${s.id}" ${lk?'disabled':''}><div class="cn-n">${s.boss?ic3('crown',20):s.s+1}</div><div class="cn-t">${esc(s.name)}</div><div class="cn-s">${[1,2,3].map(i=>`<i class="${i<=k?'on':''}">★</i>`).join('')}</div></button>`}).join('')}</div></div>`}).join('')}`;
   $('#sBody').querySelectorAll('[data-st]').forEach(b=>b.onclick=()=>campInfo(b.dataset.st));
 }
 function campInfo(id){const s=campStages().find(x=>x.id===id),b=BOT[s.bot],k=campStars(id);
@@ -3158,22 +3222,39 @@ function renderPass(){
   $('#sBody').innerHTML=`<div class="card passhero"><div class="grow"><div class="faint" style="color:#ffe9a8;font-weight:800">시즌 ${seasonNo(sid)} · ${leftText(seasonEnd())} 남음</div><div class="ph-t">${tier} <span>/ ${PASS_T} 단계</span></div>
      <div class="pzbar"><i style="width:${tier>=PASS_T?100:(xp%PASS_XP)}%;background:linear-gradient(90deg,#ffe08a,#f5b300)"></i></div><div style="font-size:12.5px;opacity:.85;margin-top:6px">XP를 얻을 때마다 올라가요 · 다음 단계까지 ${tier>=PASS_T?0:PASS_XP-xp%PASS_XP} XP</div></div></div>
    ${claimable?`<button class="btn pri wide" id="passAll" style="background:linear-gradient(90deg,#f5c542,#e0a020);color:#3a2600">보상 ${claimable}개 한 번에 받기</button>`:''}
-   <div class="ptrack">${[...Array(PASS_T)].map((_,i)=>{const t=i+1,r=passReward(t),on=t<=tier,g=got[t];return `<div class="pt ${on?'on':''} ${g?'got':''} ${t%5===0?'big':''}"><div class="pt-n num">${t}</div><div class="pt-r">${r.banner?`<div class="pt-ban" style="background:${BANNERS.find(b=>b.id==='season').css}"></div>`:r.tix?'🎟️':crownIco(16)}</div><div class="pt-l">${r.label}</div>${g?'<div class="pt-ck">✓</div>':on?`<button class="btn sm pri" data-t="${t}">받기</button>`:'<div class="pt-lk">🔒</div>'}</div>`}).join('')}</div>`;
+   <div class="ptrack">${[...Array(PASS_T)].map((_,i)=>{const t=i+1,r=passReward(t),on=t<=tier,g=got[t];return `<div class="pt ${on?'on':''} ${g?'got':''} ${t%5===0?'big':''}"><div class="pt-n num">${t}</div><div class="pt-r">${r.banner?`<div class="pt-ban" style="background:${BANNERS.find(b=>b.id==='season').css}"></div>`:r.tix?ic3('ticket',18):crownIco(16)}</div><div class="pt-l">${r.label}</div>${g?'<div class="pt-ck">✓</div>':on?`<button class="btn sm pri" data-t="${t}">받기</button>`:'<div class="pt-lk">🔒</div>'}</div>`}).join('')}</div>`;
   $('#sBody').querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>passClaim([+b.dataset.t]));
   if($('#passAll'))$('#passAll').onclick=()=>passClaim([...Array(tier)].map((_,i)=>i+1).filter(t=>!got[t]));
 }
 function passClaim(ts){const sid=seasonId(),p={};let cr=0,tix=0,ban=false;for(const t of ts){const r=passReward(t);cr+=r.cr||0;tix+=r.tix||0;if(r.banner)ban=true;p[`spc/${sid}/${t}`]=1}
   p.crowns=(me.crowns||0)+cr;if(tix)p.tix=(me.tix||0)+tix;if(ban)p['inv/banner_season']=Date.now();saveMe(p);sfx('coin');renderTop();
-  if(ban)rankUpFX({img:`<div class="pt-ban big" style="background:${BANNERS.find(b=>b.id==='season').css}"></div>`,title:'시즌 챔피언!',sub:'시즌 패스를 끝까지 올렸어요. 전설 배너를 받았어요.',reward:cr,col:'#f5b300'});else toast(`${crownIco(14)} +${cr}${tix?` · 🎟️ +${tix}`:''}`,1800,'lt');sRefresh()}
+  if(ban)rankUpFX({img:`<div class="pt-ban big" style="background:${BANNERS.find(b=>b.id==='season').css}"></div>`,title:'시즌 챔피언!',sub:'시즌 패스를 끝까지 올렸어요. 전설 배너를 받았어요.',reward:cr,col:'#f5b300'});else toast(`${crownIco(14)} +${cr}${tix?` · ${ic3('ticket',14)} +${tix}`:''}`,1800,'lt');sRefresh()}
 function passCard(){const xp=passXP(),tier=Math.min(PASS_T,Math.floor(xp/PASS_XP)),got=(me.spc||{})[seasonId()]||{},n=[...Array(tier)].map((_,i)=>i+1).filter(t=>!got[t]).length;
-  return `<button class="card tap passcard" onclick="passOpen()"><div class="pc-ic">🎫</div><div class="grow"><b>시즌 패스 <span class="num">${tier}/${PASS_T}</span></b><div class="pzbar sm"><i style="width:${tier/PASS_T*100}%;background:linear-gradient(90deg,#ffe08a,#f5b300)"></i></div></div>${n?`<span class="nb">${n}</span>`:'<span class="chev">›</span>'}</button>`}
+  return `<button class="card tap passcard" onclick="passOpen()"><div class="pc-ic">${ic3('ticket',30)}</div><div class="grow"><b>시즌 패스 <span class="num">${tier}/${PASS_T}</span></b><div class="pzbar sm"><i style="width:${tier/PASS_T*100}%;background:linear-gradient(90deg,#ffe08a,#f5b300)"></i></div></div>${n?`<span class="nb">${n}</span>`:'<span class="chev">›</span>'}</button>`}
 
 /* 게임 모드 허브 (대전 탭) */
+
+/* ---------- 3D 아이콘 ---------- */
+const IC_P={
+ bolt:['#ffe27a','#f59e0b','<path d="M27 4 9 28h12l-4 20 20-27H25z"/>'],
+ castle:['#d8c4ff','#7c4dff','<path d="M8 46V20h6v6h6v-8h8v8h6v-6h6v26H30V36a6 6 0 0 0-12 0v10z"/><path d="M8 20V12h5v4h4v-4h5v6M26 18v-6h5v4h4v-4h5v8" opacity=".85"/>'],
+ target:['#9ff0c2','#10b981','<circle cx="24" cy="26" r="20"/><circle cx="24" cy="26" r="13" fill="#fff" opacity=".9"/><circle cx="24" cy="26" r="7"/>'],
+ dice:['#ffc89a','#f97316','<rect x="6" y="8" width="36" height="36" rx="9"/><g fill="#fff"><circle cx="16" cy="18" r="3.4"/><circle cx="32" cy="34" r="3.4"/><circle cx="24" cy="26" r="3.4"/><circle cx="32" cy="18" r="3.4"/><circle cx="16" cy="34" r="3.4"/></g>'],
+ ticket:['#ffd0e0','#ec4899','<path d="M4 16a4 4 0 0 1 4-4h32a4 4 0 0 1 4 4v4a5 5 0 0 0 0 10v4a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4v-4a5 5 0 0 0 0-10z"/><path d="M30 14v24" stroke="#fff" stroke-width="2" stroke-dasharray="3 3" opacity=".8"/>'],
+ crown:['#ffe9a0','#eab308','<path d="M6 38 4 14l11 10 9-16 9 16 11-10-2 24z"/><rect x="6" y="40" width="36" height="6" rx="2"/>'],
+ trophy:['#ffe9a0','#d97706','<path d="M14 6h20v12a10 10 0 0 1-20 0z"/><path d="M14 10H6a8 8 0 0 0 8 10M34 10h8a8 8 0 0 1-8 10" fill="none" stroke="currentColor" stroke-width="4"/><path d="M21 28h6v8h-6z"/><rect x="13" y="38" width="22" height="7" rx="2"/>'],
+ flame:['#ffd08a','#ef4444','<path d="M24 4c3 9 14 13 14 26a14 14 0 0 1-28 0c0-7 4-11 6-14 1 5 4 7 4 7 0-8 2-13 4-19z"/><path d="M24 26c2 4 6 5 6 10a6 6 0 0 1-12 0c0-3 2-5 3-6 1 2 2 2 2 2 0-3 0-4 1-6z" fill="#fff" opacity=".55"/>'],
+ puzzle:['#a5e4ff','#0ea5e9','<path d="M6 16h10a5 5 0 1 1 10 0h10v10a5 5 0 1 1 0 10v10H26a5 5 0 1 0-10 0H6V36a5 5 0 1 0 0-10z"/>'],
+ swords:['#e2e8f0','#64748b','<path d="M6 6l10 2 22 22-4 4L12 12zM42 6l-10 2-22 22 4 4 22-22z"/><path d="M8 34l6 6-4 4-6-6zM40 34l-6 6 4 4 6-6z"/>']
+};
+function ic3(k,sz){const p=IC_P[k];if(!p)return'';const id='ic'+k+(ic3.n=(ic3.n||0)+1);
+ return `<svg class="ic3" viewBox="0 0 48 50" ${sz?`style="width:${sz}px;height:${sz}px"`:''}><defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${p[0]}"/><stop offset="1" stop-color="${p[1]}"/></linearGradient><linearGradient id="${id}h" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".7"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/></linearGradient></defs><g fill="url(#${id})" color="${p[1]}" stroke="rgba(0,0,0,.18)" stroke-width=".8">${p[2]}</g><g fill="url(#${id}h)" opacity=".6">${p[2]}</g></svg>`}
+function setTheme(t){document.documentElement.dataset.theme=t;try{localStorage.setItem('siechess_theme',t)}catch(e){}}
 function modesGrid(){return `<div class="mgrid">
-  <button class="mg" style="--mc:#e2445c" onclick="rushPick()"><span class="mg-e">⚡</span><b>퍼즐 러시</b><small>최고 ${me.rushBest||0}점</small></button>
-  <button class="mg" style="--mc:#8b5cf6" onclick="campOpen()"><span class="mg-e">🏰</span><b>왕국 원정</b><small>★ ${campStages().reduce((a,s)=>a+campStars(s.id),0)}/72</small></button>
-  <button class="mg" style="--mc:#14a05a" onclick="coordStart()"><span class="mg-e">🎯</span><b>좌표 훈련</b><small>최고 ${me.coordBest||0}</small></button>
-  <button class="mg" style="--mc:#f08a24" onclick="variantSetup()"><span class="mg-e">🎲</span><b>변형 체스</b><small>5가지 규칙</small></button></div>`}
+  <button class="mg" style="--mc:#e2445c" onclick="rushPick()"><span class="mg-e">${ic3('bolt')}</span><b>퍼즐 러시</b><small>최고 ${me.rushBest||0}점</small></button>
+  <button class="mg" style="--mc:#8b5cf6" onclick="campOpen()"><span class="mg-e">${ic3('castle')}</span><b>왕국 원정</b><small>★ ${campStages().reduce((a,s)=>a+campStars(s.id),0)}/72</small></button>
+  <button class="mg" style="--mc:#14a05a" onclick="coordStart()"><span class="mg-e">${ic3('target')}</span><b>좌표 훈련</b><small>최고 ${me.coordBest||0}</small></button>
+  <button class="mg" style="--mc:#f08a24" onclick="variantSetup()"><span class="mg-e">${ic3('dice')}</span><b>변형 체스</b><small>5가지 규칙</small></button></div>`}
 function rushPick(){openModal(`<h3>퍼즐 러시</h3><p>메이트 퍼즐을 최대한 많이! 틀리면 ✕, 3번 틀리면 끝. 갈수록 어려워져요.</p>
   <div class="vgrid"><button onclick="closeModal();rushStart('3m')"><b>3분 러시</b><span>최고 ${me.rushBest||0}점</span></button><button onclick="closeModal();rushStart('surv')"><b>서바이벌</b><span>시간 제한 없음 · 최고 ${me.rushS||0}점</span></button></div>
   <div class="acts"><button class="btn" onclick="closeModal()">닫기</button></div>`)}
@@ -3678,7 +3759,7 @@ function renderGacha(){
       <div class="muted" style="margin-top:2px">왕좌 · 체스판 · 기물 · 대국 배경이 무작위로 나와요 · 중복이면 크라운 환급</div></div>
     <div class="ga-pity"><div style="display:flex;justify-content:space-between;font-size:13px;font-weight:700"><span>전설 확정까지</span><span class="num" style="color:#c98d0f">${PITY-pity}회</span></div><div class="bar"><i style="width:${pity/PITY*100}%;background:linear-gradient(90deg,#f5c542,#e0a020)"></i></div></div>
     <div class="ga-btns">
-      ${me.tix>0?`<button class="btn wide tixbtn" onclick="pullUI(1,'tix')">🎟️ 티켓으로 열기 · ${me.tix}장</button>`:''}${freeReady()?`<button class="btn green wide" onclick="pullUI(1,true)">오늘의 무료 뽑기</button>`:''}
+      ${me.tix>0?`<button class="btn wide tixbtn" onclick="pullUI(1,'tix')">${ic3('ticket',18)} 티켓으로 열기 · ${me.tix}장</button>`:''}${freeReady()?`<button class="btn green wide" onclick="pullUI(1,true)">오늘의 무료 뽑기</button>`:''}
       <div style="display:flex;gap:8px">
         <button class="btn line ga-b" onclick="pullUI(1)" ${(me.crowns||0)<PULL1?'disabled':''}><b>1회</b><span>${crownIco(15)}${PULL1}</span></button>
         <button class="btn pri ga-b" onclick="pullUI(10)" ${(me.crowns||0)<PULL10?'disabled':''}><b>10회</b><span>${crownIco(15)}${PULL10.toLocaleString()} · 희귀 이상 1개 확정</span></button>
@@ -3825,6 +3906,7 @@ function renderCustom(){
   }else{
     const S=setOf();
     B.innerHTML=`<div class="list">${[['sound','효과음'],['anim','기물 이동 애니메이션'],['vib','진동 (지원 기기)'],['talk','봇 말풍선'],['coords','좌표 표시'],['dots','둘 수 있는 칸 표시'],['last','마지막 수 강조']].map(([k,v])=>`<div class="tgl">${v}<button class="sw-t ${S[k]?'on':''}" data-k="${k}"></button></div>`).join('')}</div>`;
+    B.insertAdjacentHTML('afterbegin',`<div class="list"><div class="tgl">다크 모드<button class="sw-t ${document.documentElement.dataset.theme==='dark'?'on':''}" id="thSw"></button></div></div>`);$('#thSw').onclick=()=>{setTheme(document.documentElement.dataset.theme==='dark'?'light':'dark');renderCustom()};
     B.querySelectorAll('[data-k]').forEach(x=>x.onclick=()=>{saveMe({['set/'+x.dataset.k]:!setOf()[x.dataset.k]});renderCustom()});
   }
 }
@@ -4403,7 +4485,7 @@ function showResult(){
   if(col&&G.mode!=='spec')sfx(k==='W'?'win':k==='L'?'lose':'draw');
   openModal(`<div class="result"><div class="big ${k}">${txt}</div><div class="why">${esc(G.reason||'')}</div>
     ${online&&G.result!=='*'?`<div class="rchg" id="resDelta"><span style="color:var(--tx3)">레이팅 계산 중</span></div>`:''}
-    ${G.campRes?`<div class="campres"><div class="cr-st">${G.campRes.msg}</div>${G.campRes.first?`<div style="color:#b5840c;font-weight:800;margin-top:4px">${crownIco(16)} +${G.campRes.cr}${G.campRes.tix?' · 🎟️ 티켓 +1':''} · 첫 정복!</div>`:''}</div>`:G.camp?'<div class="campres" style="color:var(--tx3)">이기면 별을 받아요. 다시 도전!</div>':''}
+    ${G.campRes?`<div class="campres"><div class="cr-st">${G.campRes.msg}</div>${G.campRes.first?`<div style="color:#b5840c;font-weight:800;margin-top:4px">${crownIco(16)} +${G.campRes.cr}${G.campRes.tix?' · '+ic3('ticket',14)+' 티켓 +1':''} · 첫 정복!</div>`:''}</div>`:G.camp?'<div class="campres" style="color:var(--tx3)">이기면 별을 받아요. 다시 도전!</div>':''}
     ${G.mode==='bot'&&G.firstBeat?`<div class="rchg" style="color:var(--sky-d);font-weight:700">${G.bot.name} 첫 승리 · ${crownIco(18)} +100</div>`:''}
     ${G.xp?`<div style="margin-top:12px;font-weight:800;color:var(--sky-d);display:flex;justify-content:center;align-items:center;gap:10px" class="num">+${G.xp} XP <span style="display:inline-flex;align-items:center;gap:4px;color:#b5840c">${crownIco(16)}+${G.xp}</span></div>`:''}</div>
     <div id="tierMsg"></div>
