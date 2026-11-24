@@ -65,7 +65,8 @@ input,select,textarea{font:inherit;color:var(--tx)}
 .ic svg,.iconbtn svg,.nav svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 
 /* auth */
-#scrAuth{align-items:center;justify-content:center;padding:24px}
+#scrAuth,#scrVerify{align-items:center;justify-content:center;padding:24px}
+#scrVerify .brand p{line-height:1.6;text-align:center}
 .auth{width:100%;max-width:360px;display:flex;flex-direction:column;gap:10px}
 .brand{display:flex;flex-direction:column;align-items:center;margin-bottom:22px}
 .mark{width:72px;height:72px;border-radius:20px;background:var(--sky);display:grid;place-items:center;margin-bottom:16px}
@@ -736,7 +737,20 @@ ol.steps{padding-left:20px;color:var(--tx2);font-size:14px;line-height:1.8;margi
     <button id="btnAuth" class="btn pri" style="margin-top:4px">로그인</button>
     <div id="authMsg" class="msg"></div>
     <button class="lnk" id="btnReset" style="margin:2px auto 0;display:block;font-size:13px">비밀번호를 잊었어요</button>
-    <p class="note" id="authNote">이메일 하나에 계정 하나. 어느 기기에서든 같은 이메일로 이어서 할 수 있어요.</p>
+    <p class="note" id="authNote">이메일 하나에 계정 하나. 가입하면 인증 메일이 가요. 인증해야 시작할 수 있어요.</p>
+  </div>
+</section>
+
+<section id="scrVerify" class="screen">
+  <div class="auth">
+    <div class="brand"><div class="mark" style="background:linear-gradient(145deg,#5ab8ff,#1c84cf);display:grid;place-items:center"><svg viewBox="0 0 24 24" style="width:34px;height:34px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 6.5l8.5 7 8.5-7"/></svg></div>
+      <div class="word" style="font-size:24px">이메일 인증</div>
+      <p><b id="vEmail"></b> 로<br>인증 메일을 보냈어요. 메일의 링크를 누르면 바로 시작돼요.</p></div>
+    <button class="btn pri" id="vCheck">인증했어요</button>
+    <button class="btn line" id="vResend">인증 메일 다시 보내기</button>
+    <div id="vMsg" class="msg"></div>
+    <p class="note">메일이 안 보이면 스팸함을 확인해 주세요. 인증하면 이 화면이 자동으로 넘어가요.</p>
+    <button class="lnk" id="vOut" style="margin:6px auto 0;display:block;font-size:13px">다른 이메일로 가입하기</button>
   </div>
 </section>
 
@@ -2024,11 +2038,27 @@ async function doAuth(){
       if(!tr.committed){await cred.user.delete().catch(()=>{});signingUp=false;btn.disabled=false;return msg.textContent='이미 다른 사람이 쓰는 이름이에요. 다른 이름을 골라 주세요'}
       await db.ref('users/'+cred.user.uid).set(newProfile(name,grade));
       cred.user.sendEmailVerification().catch(()=>{});
-      signingUp=false;await boot(cred.user);
+      signingUp=false;await gateVerify(cred.user);
     }else await auth.signInWithEmailAndPassword(email,pw);
   }catch(e){signingUp=false;msg.textContent=AUTH_ERR[e.code]||('오류: '+(e.code||e.message))}
   btn.disabled=false;
 }
+
+/* ---------- 이메일 인증 ---------- */
+let verifyTimer=null;
+async function gateVerify(user){
+  try{await user.reload()}catch(e){}
+  const u=auth.currentUser||user;
+  if(u.emailVerified){clearInterval(verifyTimer);return boot(u)}
+  show('scrVerify',false);$('#vEmail').textContent=u.email;$('#vMsg').textContent='';
+  clearInterval(verifyTimer);verifyTimer=setInterval(async()=>{const c=auth.currentUser;if(!c){clearInterval(verifyTimer);return}try{await c.reload()}catch(e){}if(auth.currentUser&&auth.currentUser.emailVerified){clearInterval(verifyTimer);toast('이메일 인증 완료!',2000,'lt');boot(auth.currentUser)}},4000);
+}
+function verifyBind(){
+  $('#vCheck').onclick=async()=>{const c=auth.currentUser;if(!c)return;await c.reload().catch(()=>{});if(auth.currentUser.emailVerified)gateVerify(auth.currentUser);else $('#vMsg').textContent='아직 인증이 안 됐어요. 메일의 링크를 눌렀는지 확인해 주세요.'};
+  $('#vResend').onclick=async()=>{const c=auth.currentUser;if(!c)return;try{await c.sendEmailVerification();$('#vMsg').style.color='var(--win)';$('#vMsg').textContent='인증 메일을 다시 보냈어요. 스팸함도 확인해 주세요.';setTimeout(()=>$('#vMsg').style.color='',5000)}catch(e){$('#vMsg').textContent=e.code==='auth/too-many-requests'?'잠시 후 다시 보내 주세요':'오류: '+e.code}};
+  $('#vOut').onclick=async()=>{clearInterval(verifyTimer);await auth.signOut();show('scrAuth',false)};
+}
+verifyBind();
 
 /* ---------- 부팅 / 구독 ---------- */
 async function boot(user){
@@ -4110,7 +4140,7 @@ if(ONLINE){
   firebase.initializeApp(FB_CONFIG);
   auth=firebase.auth();db=firebase.database();SV=firebase.database.ServerValue;
   show('scrAuth',false);
-  auth.onAuthStateChanged(u=>{if(signingUp)return;if(u)boot(u);else show('scrAuth',false)});
+  auth.onAuthStateChanged(u=>{if(signingUp)return;if(u)gateVerify(u);else show('scrAuth',false)});
 }else{
   $('#authNote').textContent='온라인 연결 전이라 이 기기에만 저장돼요. 이름과 학년만 넣고 시작하세요.';
   $('#inPw').classList.add('hidden');$('#authSeg').classList.add('hidden');$('#inGrade').classList.remove('hidden');$('#btnAuth').textContent='시작하기';
