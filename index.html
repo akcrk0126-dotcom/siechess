@@ -620,6 +620,23 @@ table.stand{width:100%;border-collapse:collapse;font-size:13.5px}table.stand th{
 .opt.sh.r-l::before{content:"";position:absolute;inset:-2px;border-radius:15px;box-shadow:0 0 16px rgba(224,160,32,.45);pointer-events:none}
 .av .avp{width:78%;height:78%;filter:drop-shadow(0 1px 1px rgba(0,0,0,.25))}
 .av{box-shadow:inset 0 -2px 4px rgba(0,0,0,.15),inset 0 2px 3px rgba(255,255,255,.35)}
+.flag{margin-right:4px;font-size:1.05em}
+.phead{position:relative;margin:-16px -16px 0;padding:0 16px}.phead .pban{height:84px;border-radius:16px 16px 0 0;background-size:cover}
+.phead.big .pban{height:104px}.modal .phead{margin:-22px -22px 0;padding:0 22px}.modal .phead .pban{border-radius:22px 22px 0 0}
+.phead .pav{margin-top:-34px;width:max-content;border-radius:50%;padding:4px;background:var(--sf)}.phead .pav .av{width:64px;height:64px;font-size:26px}
+.phead .pnm{margin-top:6px}.phead .pn{font-size:21px;font-weight:850;letter-spacing:-.02em}
+#cPrevAv .phead{margin:-14px -14px 4px}
+.crgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:12px}
+.crgrid>div{border-radius:12px;background:var(--sf2);padding:8px 4px;text-align:center;display:flex;flex-direction:column;gap:1px;border-top:3px solid var(--cc)}
+.crgrid span{font-size:11px;font-weight:800;color:var(--cc)}.crgrid b{font-size:17px;font-weight:850}.crgrid em{font-style:normal;font-size:10px;color:var(--tx3);font-weight:700}
+.pbadges{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}.pbadge{display:flex;align-items:center;gap:6px;background:var(--sf2);border-radius:99px;padding:4px 10px 4px 4px;font-size:12px;font-weight:750}
+.pbadge .md,.bpick .md{width:24px;height:24px;border-radius:50%;display:grid;place-items:center}.pbadge svg,.bpick svg{width:14px;height:14px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.flags{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.flags button{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 2px;border-radius:12px;border:2px solid var(--ln);background:var(--sf);font-size:22px}.flags button span{font-size:10.5px;font-weight:700;color:var(--tx2)}.flags button.on{border-color:var(--sky);background:var(--sky-ll)}
+.ncols{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.ncols button{padding:9px 4px;border-radius:12px;border:2px solid var(--ln);background:var(--sf);display:flex;flex-direction:column;gap:2px;align-items:center}.ncols b{font-size:15px;font-weight:850}.ncols span{font-size:10.5px;color:var(--tx3);font-weight:700}.ncols button.on{border-color:var(--sky)}.ncols button.locked{opacity:.5}
+.bpick{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}.bpick button{display:flex;align-items:center;gap:8px;padding:8px;border-radius:12px;border:2px solid var(--ln);background:var(--sf);font-size:12.5px;font-weight:700;text-align:left}.bpick button.on{border-color:var(--sky);background:var(--sky-ll)}
+.catseg{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-bottom:8px}.catseg button{flex:1;min-width:max-content;padding:9px 12px;border-radius:12px;background:var(--sf);border:2px solid var(--ln);font-weight:800;font-size:13.5px;color:var(--cc)}.catseg button.on{background:var(--cc);color:#fff;border-color:var(--cc)}
+.bnth{position:absolute;inset:0 0 40% 0}.bnav{position:absolute;left:12%;bottom:16%}.bnav .av{width:36px;height:36px;border:3px solid #fff;font-size:14px}
+.tcs{grid-template-columns:repeat(3,1fr)!important}
 .ga-dex{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
 .dx{border-radius:10px;overflow:hidden;border:2px solid var(--rc);background:var(--sf);position:relative}
 .dx .porx{border-radius:0}
@@ -1365,7 +1382,24 @@ const ICON_PATHS={
   sun:'<circle cx="12" cy="12" r="4.5"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8" stroke="#fff" stroke-width="2" stroke-linecap="round"/>',
   crown:'<path d="M4 8l4 4 4-6 4 6 4-4-1.5 10h-13z"/>',
   heart:'<path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0 1 12 7.4 4.3 4.3 0 0 1 19.5 10c0 5.4-7.5 10-7.5 10z"/>'};
-const DEF_COS={av:'init',avc:'#3fa9f5',title:'',bio:'',board:'sky',pieces:'navy',gbg:'plain'};
+const DEF_COS={av:'init',avc:'#3fa9f5',title:'',bio:'',board:'sky',pieces:'navy',gbg:'plain',banner:'sky',flag:'',ncol:'',badges:[]};
+const FLAGS=[['','선택 안 함'],['🇰🇷','대한민국'],['🇺🇸','미국'],['🇨🇦','캐나다'],['🇯🇵','일본'],['🇨🇳','중국'],['🇹🇼','대만'],['🇻🇳','베트남'],['🇵🇭','필리핀'],['🇹🇭','태국'],['🇮🇩','인도네시아'],['🇸🇬','싱가포르'],['🇮🇳','인도'],['🇦🇺','호주'],['🇳🇿','뉴질랜드'],['🇬🇧','영국'],['🇫🇷','프랑스'],['🇩🇪','독일'],['🇪🇸','스페인'],['🇮🇹','이탈리아'],['🇳🇴','노르웨이'],['🇷🇺','러시아'],['🇧🇷','브라질'],['🇲🇽','멕시코']];
+const NCOLS=[['','기본'],['#1c84cf','하늘'],['#14a05a','숲'],['#8b5cf6','보라'],['#e2445c','장미'],['#f08a24','노을'],['#139c84','민트'],['gold','황금',{ach:'tier_gold'}],['rainbow','무지개',{ach:'tier_plat'}]];
+const BANNERS=[
+  {id:'sky',name:'하늘',r:'c',free:1,css:'linear-gradient(120deg,#7cc8ff,#3fa9f5 55%,#1c84cf)'},
+  {id:'mint',name:'민트',r:'c',free:1,css:'linear-gradient(120deg,#9af0d0,#2fb39b)'},
+  {id:'peach',name:'복숭아',r:'c',css:'linear-gradient(120deg,#ffd3b8,#ff9f7a)'},
+  {id:'grape',name:'포도',r:'c',css:'linear-gradient(120deg,#c7a8ff,#7b4ad6)'},
+  {id:'checker',name:'체커',r:'u',css:'repeating-conic-gradient(#2b3d52 0 25%,#3a5470 0 50%) 0 0/36px 36px'},
+  {id:'sunset',name:'석양',r:'u',css:'linear-gradient(160deg,#ffcf6a,#ff7a59 45%,#8a3aa8)'},
+  {id:'forest',name:'숲길',r:'u',css:'radial-gradient(120% 140% at 0 100%,#2f9f6c,transparent 60%),linear-gradient(120deg,#b6e88a,#1d7f52)'},
+  {id:'wood',name:'원목 체스판',r:'r',css:'repeating-conic-gradient(#e9c99b 0 25%,#9a6236 0 50%) 0 0/44px 44px'},
+  {id:'ocean',name:'심해',r:'r',css:'radial-gradient(60% 120% at 80% 0,#5ec2f2,transparent 60%),linear-gradient(180deg,#1c5aa0,#061a3a)'},
+  {id:'cherry',name:'벚꽃비',r:'r',g:1,css:'radial-gradient(circle at 20% 30%,#fff 0 2px,transparent 3px) 0 0/40px 40px,radial-gradient(circle at 70% 60%,#ffd1e3 0 3px,transparent 4px) 0 0/56px 56px,linear-gradient(120deg,#ffb3cf,#ff6f9a)'},
+  {id:'aurora',name:'오로라',r:'e',css:'radial-gradient(80% 120% at 20% 0,#7cf0d0aa,transparent 60%),radial-gradient(80% 120% at 80% 20%,#b48affaa,transparent 60%),linear-gradient(180deg,#0b1a3a,#132a5a)'},
+  {id:'lava',name:'용암',r:'e',g:1,css:'radial-gradient(70% 100% at 50% 120%,#ffb347,transparent 60%),linear-gradient(180deg,#2a0606,#7a1e0e)'},
+  {id:'galaxy',name:'은하',r:'l',g:1,css:'radial-gradient(1.5px 1.5px at 20% 30%,#fff,transparent),radial-gradient(1px 1px at 60% 70%,#fff,transparent),radial-gradient(1.5px 1.5px at 85% 20%,#ffe9a8,transparent),radial-gradient(60% 100% at 30% 40%,#8a5ad0aa,transparent 70%),radial-gradient(60% 100% at 80% 70%,#ff6fd888,transparent 70%),#0b0726'},
+  {id:'royal',name:'왕실',r:'l',css:'repeating-linear-gradient(45deg,#ffffff14 0 2px,transparent 2px 12px),linear-gradient(120deg,#4a1a6a,#8a2a9a 50%,#c9962c)'}];
 const DEF_SET={coords:true,dots:true,last:true,sound:true,anim:true,vib:true,talk:true};
 
 /* ================================================================
@@ -1424,8 +1458,16 @@ const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const TCS=[
   {id:'1+0',base:60e3,inc:0,cat:'불릿'},{id:'3+0',base:180e3,inc:0,cat:'블리츠'},{id:'3+2',base:180e3,inc:2e3,cat:'블리츠'},
-  {id:'5+0',base:300e3,inc:0,cat:'블리츠'},{id:'10+0',base:600e3,inc:0,cat:'래피드'},{id:'15+10',base:900e3,inc:10e3,cat:'래피드'}];
-const TC=Object.fromEntries(TCS.map(t=>[t.id,t]));
+  {id:'5+0',base:300e3,inc:0,cat:'블리츠'},{id:'10+0',base:600e3,inc:0,cat:'래피드'},{id:'15+10',base:900e3,inc:10e3,cat:'래피드'},
+  {id:'2+1',base:120e3,inc:1e3,cat:'불릿'},{id:'30+0',base:1800e3,inc:0,cat:'스탠다드'},{id:'30+20',base:1800e3,inc:20e3,cat:'스탠다드'}];
+TCS.sort((a,b)=>(a.base+a.inc*40)-(b.base+b.inc*40));
+const RCATS=[['bullet','불릿','#e2445c'],['blitz','블리츠','#f08a24'],['rapid','래피드','#14a05a'],['std','스탠다드','#3fa9f5']];
+const catOf=tc=>({'불릿':'bullet','블리츠':'blitz','래피드':'rapid','스탠다드':'std'})[(TC_[tc]||{}).cat]||'blitz';
+const TC_={};
+function crOf(u,k){return Object.assign({r:START_RATING,g:0,w:0,l:0,d:0,peak:START_RATING},((u&&u.cr)||{})[k]||{})}
+const rOf=(u,k)=>k&&k!=='all'?crOf(u,k).r:((u&&u.rating)||START_RATING);
+const gOf=(u,k)=>k&&k!=='all'?crOf(u,k).g:((u&&u.games)||0);
+const TC=Object.fromEntries(TCS.map(t=>[t.id,t]));Object.assign(TC_,TC);
 const TIER_ASC=[
   {n:'아이언',min:0,c:'#6e7781'},{n:'브론즈',min:900,c:'#b06d3b'},{n:'실버',min:1100,c:'#7f8e9d'},{n:'골드',min:1300,c:'#c99312'},
   {n:'플래티넘',min:1500,c:'#139c84'},{n:'다이아몬드',min:1700,c:'#1f9be0'},{n:'마스터',min:1900,c:'#8b5cf6'},{n:'그랜드마스터',min:2100,c:'#e2445c'}];
@@ -1625,6 +1667,12 @@ function avHTML(u,{ring=true,dot=false,cls=''}={}){
   const ic=avIconSVG(c.av,c.avc);
   return `<div class="av ${ring?'avr':''} ${cls}" style="background:radial-gradient(circle at 32% 25%,${shade(c.avc,.45)},${c.avc} 55%,${shade(c.avc,-.3)});--ring:${t.color}">${ic||esc(((u&&u.name)||'?')[0].toUpperCase())}${dot?'<i class="on-dot"></i>':''}</div>`;
 }
+function ncolStyle(u){const n=cosOf(u).ncol;if(!n)return'';if(n==='gold')return 'background:linear-gradient(90deg,#c9962c,#f5c542,#b8860b);-webkit-background-clip:text;background-clip:text;color:transparent';if(n==='rainbow')return 'background:linear-gradient(90deg,#e2445c,#f08a24,#c99312,#14a05a,#1c84cf,#8b5cf6);-webkit-background-clip:text;background-clip:text;color:transparent';return 'color:'+n}
+function nameHTML(u){const c=cosOf(u);return `${c.flag?`<span class="flag">${c.flag}</span>`:''}<span style="${ncolStyle(u)}">${esc((u&&u.name)||'?')}</span>`}
+const bannerCSS=u=>(BANNERS.find(b=>b.id===cosOf(u).banner)||BANNERS[0]).css;
+function badgesHTML(u){const b=(cosOf(u).badges||[]).map(id=>ACH[id]).filter(Boolean);return b.length?`<div class="pbadges">${b.map(a=>`<div class="pbadge" title="${esc(a.name)}"><div class="md" style="background:${a.c}"><svg viewBox="0 0 24 24">${ICO[a.ic]}</svg></div><span>${esc(a.name)}</span></div>`).join('')}</div>`:''}
+function crGrid(u){return `<div class="crgrid">${RCATS.map(([k,n,c])=>{const x=crOf(u,k);return `<div style="--cc:${c}"><span>${n}</span><b class="num">${x.g?x.r:'-'}</b><em>${x.g?x.g+'판':'기록 없음'}</em></div>`}).join('')}</div>`}
+function profHead(u,big){return `<div class="phead ${big?'big':''}"><div class="pban" style="background:${bannerCSS(u)}"></div><div class="pav">${avHTML(u,{cls:'big'})}</div><div class="pnm"><div class="pn">${nameHTML(u)}</div><div class="faint">${titleHTML(u)} ${esc(u.grade||'')} · Lv ${levelOf(u.xp||0).L}</div></div></div>`}
 function botAv(b){return `<div class="av bp">${portraitSVG(BOT_POR[b.id],'por')}</div>`}
 const tierHTML=r=>{const t=tier(r);return `<span class="tbadge" style="color:${t.color}">${emblemSVG(t.i,t.div)}${t.name}</span>`};
 const titleHTML=u=>{const t=cosOf(u).title;return t?`<span class="ttl">${esc(t)}</span>`:''};
@@ -2096,7 +2144,7 @@ function enterMain(){
 /* ================================================================
    메인 탭
    ================================================================ */
-let curTab='home',rankMode='league',rankFilter='전체',learnFilter='all';
+let rankCat='all';let curTab='home',rankMode='league',rankFilter='전세계',learnFilter='all';
 function goTab(t){
   curTab=t;
   document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));
@@ -2931,6 +2979,7 @@ function renderPlay(){
   $('#p-play').innerHTML=`<div class="h">대전</div>
   <div class="card row2">${avHTML(me)}<div class="grow"><div class="rn">${esc(me.name)}</div><div class="faint">${me.wins||0}승 ${me.losses||0}패 ${me.draws||0}무</div></div>
     <div class="rr"><b class="num" style="font-size:24px">${me.rating}</b>${tierHTML(me.rating)}</div></div>
+  ${crGrid(me).replace('class="crgrid"','class="crgrid" style="margin-top:0"')}
   <div class="lbl">랭킹전 · 레이팅이 비슷한 상대와 매칭</div>
   <div class="tcs" id="tcGrid">${TCS.map(t=>`<button class="tc" data-tc="${t.id}"><b class="num">${t.id}</b><span>${t.cat}</span></button>`).join('')}</div>
   ${ONLINE?`<div class="faint" style="margin:0 2px"><span class="live-dot"></span> ${Object.keys(PRES).length}명 접속 중 · 친구에게 직접 신청하려면 랭킹에서 이름을 누르세요</div>`:
@@ -2960,7 +3009,7 @@ async function loadLive(){
 /* ---------- 랭킹 탭 ---------- */
 function renderRank(){
   const el=$('#p-rank'),td=today();
-  const modes=[['league','리그'],['rating','티어'],['puzzle','퍼즐'],['streak','스트릭'],['grade','학년 대항']];
+  const modes=[['league','리그'],['rating','레이팅'],['puzzle','퍼즐'],['streak','스트릭'],['grade','학년 대항']];
   if(!modes.some(m=>m[0]===rankMode))rankMode='league';
   let body='';
   if(rankMode==='league')body=leagueView();
@@ -2968,18 +3017,19 @@ function renderRank(){
   else if(!ONLINE)body=`<div class="card empty">레이팅 랭킹, 스트릭, 학년 대항은 Firebase를 연결하면 열려요.<br><button class="btn line sm" style="margin-top:12px" onclick="showSetup()">연결 방법</button></div>`;
   else if(rankMode==='grade')body=gradeView();
   else{
-    const grades=['전체',...(me.grade?['우리 학년']:[]),...GRADES.filter(g=>LB.some(u=>u.grade===g))];
-    if(!grades.includes(rankFilter))rankFilter='전체';
-    let list=LB.filter(u=>rankFilter==='전체'||(rankFilter==='우리 학년'?u.grade===me.grade:u.grade===rankFilter));
+    const grades=['전세계',...(me.grade?['우리 학년']:[]),...GRADES.filter(g=>LB.some(u=>u.grade===g))];
+    if(!grades.includes(rankFilter))rankFilter='전세계';
+    let list=LB.filter(u=>rankFilter==='전세계'||rankFilter==='전체'||(rankFilter==='우리 학년'?u.grade===me.grade:u.grade===rankFilter));
     const sval=u=>{const s=u.streak;if(!s||!s.last)return 0;const d=dayDiff(s.last,td);return d<=1||(d===2&&s.frz>0)?s.c:0};
     const chips=`<div class="chips" id="rChips">${grades.map(g=>`<button class="${g===rankFilter?'on':''}" data-g="${g}">${g}</button>`).join('')}</div>`;
     if(rankMode==='streak'){
       list=list.map(u=>({u,v:sval(u)})).filter(x=>x.v>0).sort((a,b)=>b.v-a.v).map(x=>x.u);
       body=chips+`<div class="list" id="rankList">${list.length?list.map((u,i)=>rowHTML(u,i,`<b class="num" style="color:var(--sky-d)">${sval(u)}</b><span class="faint">일</span>`)).join(''):'<div class="empty">아직 스트릭을 이어가는 사람이 없어요</div>'}</div>`;
-    }else body=chips+ratingView(list);
+    }else body=`<div class="catseg" id="rCat">${[['all','종합','#0d1926'],...RCATS].map(([k,n,c])=>`<button data-k="${k}" class="${k===rankCat?'on':''}" style="--cc:${c}">${n}</button>`).join('')}</div>`+chips+ratingView(list);
   }
   el.innerHTML=`<div class="h">랭킹</div><div class="seg" id="rSeg">${modes.map(([k,v])=>`<button data-m="${k}" class="${k===rankMode?'on':''}">${v}</button>`).join('')}</div>${body}`;
   $('#rSeg').onclick=e=>{const b=e.target.closest('button');if(b){rankMode=b.dataset.m;renderRank()}};
+  if($('#rCat'))$('#rCat').onclick=e=>{const b=e.target.closest('button');if(b){rankCat=b.dataset.k;renderRank()}};
   if($('#rChips'))$('#rChips').onclick=e=>{const b=e.target.closest('button');if(b){rankFilter=b.dataset.g;renderRank()}};
   el.querySelectorAll('[data-u]').forEach(r=>r.onclick=()=>showProfile(r.dataset.u));
 }
@@ -2992,7 +3042,7 @@ function puzzleRankView(){
 }
 function rowHTML(u,i,right,cls=''){
   return `<button class="row ${u.uid===uid?'mine':''} ${cls}" data-u="${u.uid}"><div class="rk ${i<3&&!cls?'top':''} num">${i+1}</div>${avHTML(u,{dot:!!PRES[u.uid]})}
-    <div class="grow"><div class="rn">${esc(u.name)} ${titleHTML(u)}</div><div class="rs">${esc(u.grade||'-')} · Lv ${levelOf(u.xp||0).L}</div></div><div class="rr">${right}</div></button>`;
+    <div class="grow"><div class="rn">${nameHTML(u)} ${titleHTML(u)}</div><div class="rs">${esc(u.grade||'-')} · Lv ${levelOf(u.xp||0).L}</div></div><div class="rr">${right}</div></button>`;
 }
 function leagueView(){
   const W=weekKey(),L=lgIdx(me.lg),joined=!!((me.wx||{})[W]);
@@ -3015,18 +3065,20 @@ function leagueView(){
     <div class="list">${rows||'<div class="empty">아직 이번 주 참가자가 없어요</div>'}</div>`;
 }
 function ratingView(list){
-  const t=tier(me.rating),active=LB.filter(u=>(u.games||0)>0),myIdx=active.findIndex(u=>u.uid===uid);
+  const K=rankCat,R_=u=>rOf(u,K),G_=u=>gOf(u,K),myR=R_(me),myG=G_(me);
+  list=list.filter(u=>G_(u)>0||u.uid===uid).sort((a,b)=>R_(b)-R_(a));
+  const t=tier(myR),active=LB.filter(u=>G_(u)>0).sort((a,b)=>R_(b)-R_(a)),myIdx=active.findIndex(u=>u.uid===uid);
   const pct=myIdx>=0?Math.max(1,Math.ceil((myIdx+1)/active.length*100)):null,sid=seasonId(),sbest=(me.seasons||{})[sid];
   const top=list.slice(0,3),order=[top[1],top[0],top[2]];
-  const cnt=TIER_ASC.map((_,i)=>active.filter(u=>tier(u.rating).i===i).length),mx=Math.max(1,...cnt);
-  return `<div class="card hero">${tierEmblem(me.rating)}<div class="grow"><div class="faint" style="font-weight:700">시즌 ${seasonNo(sid)} · ${leftText(seasonEnd())} 남음</div>
+  const cnt=TIER_ASC.map((_,i)=>active.filter(u=>tier(R_(u)).i===i).length),mx=Math.max(1,...cnt);
+  return `<div class="card hero">${tierEmblem(myR)}<div class="grow"><div class="faint" style="font-weight:700">${K==='all'?'종합':RCATS.find(x=>x[0]===K)[1]} · 시즌 ${seasonNo(sid)} · ${leftText(seasonEnd())} 남음</div>
       <div style="font-size:20px;font-weight:850;color:${t.color};margin-top:2px">${t.name}</div>
-      <div class="muted num">${me.rating}점${pct?` · 상위 ${pct}%`:''}${(me.games||0)<PROV?` · 배치 ${me.games||0}/${PROV}`:''}</div>
-      ${t.nextAt?`<div class="bar"><i style="width:${Math.round((me.rating-t.min)/(t.nextAt-t.min)*100)}%;background:${t.color}"></i></div><div class="faint" style="margin-top:4px">${t.nextName}까지 ${t.nextAt-me.rating}점${sbest?` · 시즌 최고 ${tier(sbest).name}`:''}</div>`:''}</div></div>
-    ${top.length>=3?`<div class="podium">${order.map((u,k)=>{const pl=[2,1,3][k];return `<button class="pod p${pl}" data-u="${u.uid}"><span class="place">${pl}위</span>${avHTML(u)}<span class="nm">${esc(u.name)}</span>${tierHTML(u.rating)}<b class="num" style="font-size:15px">${u.rating}</b></button>`}).join('')}</div>`:''}
+      <div class="muted num">${myR}점${pct?` · 상위 ${pct}%`:''}${myG<PROV?` · 배치 ${myG}/${PROV}`:''}</div>
+      ${t.nextAt?`<div class="bar"><i style="width:${Math.round((myR-t.min)/(t.nextAt-t.min)*100)}%;background:${t.color}"></i></div><div class="faint" style="margin-top:4px">${t.nextName}까지 ${t.nextAt-myR}점${sbest?` · 시즌 최고 ${tier(sbest).name}`:''}</div>`:''}</div></div>
+    ${top.length>=3?`<div class="podium">${order.map((u,k)=>{const pl=[2,1,3][k];return `<button class="pod p${pl}" data-u="${u.uid}"><span class="place">${pl}위</span>${avHTML(u)}<span class="nm">${nameHTML(u)}</span>${tierHTML(R_(u))}<b class="num" style="font-size:15px">${R_(u)}</b></button>`}).join('')}</div>`:''}
     <div class="card"><b style="font-size:15px">티어 분포</b><span class="faint"> · 랭킹전 참가 ${active.length}명</span>
       <div class="dist">${TIER_ASC.map((x,i)=>({x,i})).reverse().map(({x,i})=>`<div class="dr ${t.i===i?'me':''}">${emblemSVG(i,0)}<span class="dn" style="color:${x.c}">${x.n}</span><div class="dt"><i style="width:${cnt[i]/mx*100}%;background:${x.c}"></i></div><span class="dc">${cnt[i]}</span></div>`).join('')}</div></div>
-    <div class="list" id="rankList">${list.slice(top.length>=3?3:0).map((u,i)=>rowHTML(u,i+(top.length>=3?3:0),`<b class="num">${u.rating}</b>${(u.games||0)<PROV?'<span class="tier" style="color:var(--sky-d)">배치 중</span>':tierHTML(u.rating)}`)).join('')||(top.length>=3?'':'<div class="empty">아직 아무도 없어요</div>')}</div>`;
+    <div class="list" id="rankList">${list.slice(top.length>=3?3:0).map((u,i)=>rowHTML(u,i+(top.length>=3?3:0),`<b class="num">${R_(u)}</b>${G_(u)<PROV?'<span class="tier" style="color:var(--sky-d)">배치 중</span>':tierHTML(R_(u))}`)).join('')||(top.length>=3?'':'<div class="empty">아직 아무도 없어요</div>')}</div>`;
 }
 function gradeView(){
   const wk=weekKey(),G_={};
@@ -3039,9 +3091,10 @@ function gradeView(){
 function showProfile(u){
   const p=LB.find(x=>x.uid===u);if(!p)return;
   const games=p.games||0,wr=games?Math.round((p.wins||0)/games*100):0,c=cosOf(p),t=tier(p.rating);
-  const m=openModal(`<div style="width:150px;margin:0 auto 14px">${portraitSVG(porOf(p),'por')}</div><div style="text-align:center;margin:-6px 0 12px"><span class="rtag" style="background:${RAR[porRarity(porOf(p))].c}">${RAR[porRarity(porOf(p))].n} 왕좌</span> <span class="faint">컬렉션 ${collScore(p)}점</span></div><div class="prof">${avHTML(p)}<div><h3 style="margin:0">${esc(p.name)} ${titleHTML(p)}</h3>
+  const m=openModal(`${profHead(p,true)}<div style="display:flex;gap:12px;align-items:center;margin-top:12px"><div style="width:96px;flex:none">${portraitSVG(porOf(p),'por')}</div><div class="grow"><div class="faint">${PRES[u]?'<span style="color:var(--win)">● 접속 중</span>':'오프라인'}</div>${crGrid(p)}</div></div>
+    <div style="display:none"><div style="width:150px;margin:0 auto 14px">${portraitSVG(porOf(p),'por')}</div><div style="text-align:center;margin:-6px 0 12px"><span class="rtag" style="background:${RAR[porRarity(porOf(p))].c}">${RAR[porRarity(porOf(p))].n} 왕좌</span> <span class="faint">컬렉션 ${collScore(p)}점</span></div><div class="prof">${avHTML(p)}<div><h3 style="margin:0">${esc(p.name)} ${titleHTML(p)}</h3>
     <p>${esc(p.grade||'-')} · Lv ${levelOf(p.xp||0).L}${PRES[u]?' · <span style="color:var(--win)">접속 중</span>':''}</p></div></div>
-    ${c.bio?`<p style="margin-top:12px;color:var(--tx)">${esc(c.bio)}</p>`:''}
+    </div>${c.bio?`<p style="margin-top:12px;color:var(--tx)">${esc(c.bio)}</p>`:''}${badgesHTML(p)}
     <div class="row2" style="margin-top:14px;gap:10px">
       <div class="card grow row2" style="padding:12px;gap:10px">${emblemSVG(t.i,t.div,'emb" style="width:40px;height:40px')}<div><b style="color:${t.color};font-size:14px">${t.name}</b><div class="faint num">${p.rating}점</div></div></div>
       <div class="card grow row2" style="padding:12px;gap:10px">${leagueEmblem(p.lg||0,'emb" style="width:40px;height:40px')}<div><b style="font-size:14px">${lgName(p.lg||0)}</b><div class="faint">최고 ${LEAGUES[lgIdx(p.lgBest)][0]}</div></div></div></div>
@@ -3068,9 +3121,9 @@ async function renderMe(){
   const pct=t.nextAt?Math.round((me.rating-t.min)/(t.nextAt-t.min)*100):100,seas=Object.entries(me.seasons||{}).sort((a,b)=>b[0]<a[0]?-1:1);
   const got=ACHS.filter(a=>(me.ach||{})[a.id]).length;
   $('#p-me').innerHTML=`
-  <div class="card"><div class="prof">${avHTML(me)}<div class="grow"><h3 style="font-size:20px;font-weight:800">${esc(me.name)}</h3><div class="faint">${titleHTML(me)} ${esc(me.grade||'')} · Lv ${lv.L}</div></div></div>
-    ${c.bio?`<p style="margin-top:12px;font-size:14.5px">${esc(c.bio)}</p>`:''}
-    <button class="btn line wide" style="margin-top:14px" onclick="openCustom()">체스판 · 기물 · 대국 배경 꾸미기</button></div>
+  <div class="card pcard">${profHead(me,true)}
+    ${c.bio?`<p style="margin-top:10px;font-size:14.5px">${esc(c.bio)}</p>`:''}${badgesHTML(me)}${crGrid(me)}
+    <div class="row2" style="margin-top:12px;gap:8px"><button class="btn line grow" onclick="openCustom()">프로필 꾸미기</button><button class="btn line grow" onclick="cTab='board';openCustom()">체스판 · 기물</button></div></div>
   <button class="card tap" onclick="openThrone()"><div class="row2"><div style="width:84px;flex:none">${portraitSVG(porOf(me),'por')}</div><div class="grow"><div class="faint" style="font-weight:700">나의 왕좌</div>
     <div style="font-size:17px;font-weight:800;margin-top:2px">왕좌실</div><div class="muted" style="margin-top:2px"><span class="rtag" style="background:${RAR[porRarity(porOf(me))].c}">${RAR[porRarity(porOf(me))].n}</span> 컬렉션 ${collScore(me)}점</div>
     <div style="display:flex;align-items:center;gap:5px;margin-top:6px;font-weight:750;color:#b5840c">${crownIco(18)}${(me.crowns||0).toLocaleString()} 크라운</div></div><span class="chev">›</span></div></button>
@@ -3382,8 +3435,8 @@ function showPullResult(out,n,free){
    ================================================================ */
 let cTab='profile',prevBV=null;
 /* ---------- 상점 아이템 (체스판 · 기물 · 대국 배경) ---------- */
-const SHOP={board:BOARDS,pieces:PIECES,gbg:GBGS};
-const CATN={board:'체스판',pieces:'기물',gbg:'대국 배경'};
+const SHOP={board:BOARDS,pieces:PIECES,gbg:GBGS,banner:BANNERS};
+const CATN={board:'체스판',pieces:'기물',gbg:'대국 배경',banner:'프로필 배너'};
 const shopOwns=(cat,it)=>!!(it.free||(me&&(me.inv||{})[cat+'_'+it.id])||(it.ach&&me&&(me.ach||{})[it.ach]));
 function gbgCSS(id){const g=GBGS.find(x=>x.id===id)||GBGS[0];if(g.art)return `url('${ART[g.art]}')`;return g.css||''}
 function applyGbg(){const el=$('#scrGame');if(!el)return;const id=cosOf(me).gbg,g=GBGS.find(x=>x.id===id)||GBGS[0],c=gbgCSS(id);
@@ -3398,6 +3451,7 @@ function shopThumb(cat,it){
   const c=cosOf(me),bd=BOARDS.find(x=>x.id===c.board)||BOARDS[0];
   if(cat==='board')return `<div class="sthumb" style="--rc:${RAR[it.r].c}">${mini4(it,{1:'k',6:'p',9:'N',14:'Q'})}</div>`;
   if(cat==='pieces')return `<div class="sthumb" style="--rc:${RAR[it.r].c}">${mini4(bd,{5:'q',6:'k',9:'N',10:'K'},it.id,'big')}</div>`;
+  if(cat==='banner')return `<div class="sthumb"><div class="bnth" style="background:${it.css}"></div><div class="bnav">${avHTML(me,{ring:false})}</div></div>`;
   const css=gbgCSS(it.id);return `<div class="sthumb gb" style="${css?`background:${css} center/cover`:''}">${mini4(bd,{1:'k',14:'K'},null,'persp')}</div>`;
 }
 function itemThumb(cat,it){return SHOP[cat]?shopThumb(cat,it):portraitSVG(Object.assign({},porOf(me),{[cat]:it.id}),'por')}
@@ -3439,7 +3493,7 @@ function setCos(patch){
 }
 function renderCustom(){
   const c=cosOf(me);
-  $('#cPrevAv').innerHTML=`<div style="display:flex;align-items:center;gap:12px">${avHTML(me,{cls:'big'})}<div><b style="font-size:17px">${esc(me.name)}</b><div>${titleHTML(me)}</div>${c.bio?`<div class="muted" style="margin-top:2px">${esc(c.bio)}</div>`:''}</div></div>`;
+  $('#cPrevAv').innerHTML=profHead(me,false);
   if(!prevBV){prevBV=new BoardView($('#cPrevBoard'),{interactive:false});$('#cPrevBoard').style.setProperty('--bs','216px')}
   const pc=new Chess('r1bqk2r/pppp1ppp/2n2n2/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4');pc.move('e1g1');
   prevBV.chess=pc;prevBV.sel=-1;prevBV.targets=[];prevBV.render();
@@ -3452,7 +3506,15 @@ function renderCustom(){
       return `<button class="opt ${c.av===a.id?'on':''} ${u?'':'locked'}" data-av="${a.id}" style="padding:8px 2px"><div class="av" style="background:${u?c.avc:'#c3ccd6'};width:38px;height:38px">${ic||esc(me.name[0])}</div>${u?'':`<span class="lk">${lockText(a)}</span>`}</button>`}).join('')}</div>
       <div class="lbl">색</div><div class="optgrid c5" style="gap:12px">${AV_COLORS.map(col=>`<button class="colr ${c.avc===col?'on':''}" data-col="${col}" style="background:${col}"></button>`).join('')}</div>
       <div class="lbl">칭호 <span class="faint">업적으로 해금</span></div><div class="titles">${titles.map(t=>`<button class="${c.title===t?'on':''}" data-t="${esc(t)}">${t?esc(t):'없음'}</button>`).join('')}</div>
-      <div class="lbl">한마디</div><input class="field" id="bioIn" maxlength="30" placeholder="프로필에 보일 한 줄 (30자)" value="${esc(c.bio)}">`;
+      <div class="lbl">한마디</div><input class="field" id="bioIn" maxlength="30" placeholder="프로필에 보일 한 줄 (30자)" value="${esc(c.bio)}">
+      <div class="lbl">국가</div><div class="flags">${FLAGS.map(([f,n])=>`<button class="${c.flag===f?'on':''}" data-flag="${f}">${f||'✕'}<span>${n}</span></button>`).join('')}</div>
+      <div class="lbl">이름 색</div><div class="ncols">${NCOLS.map(([v,n,o])=>{const lk=o&&o.ach&&!(me.ach||{})[o.ach];return `<button class="${c.ncol===v?'on':''} ${lk?'locked':''}" data-nc="${v}"><b style="${ncolStyle({name:'',cos:{ncol:v}})}">${esc(me.name)}</b><span>${lk?ACH[o.ach].name:n}</span></button>`}).join('')}</div>
+      <div class="lbl">대표 업적 <span class="faint">최대 3개</span></div><div class="bpick">${ACHS.filter(a=>(me.ach||{})[a.id]).map(a=>`<button class="${(c.badges||[]).includes(a.id)?'on':''}" data-bd="${a.id}"><div class="md" style="background:${a.c}"><svg viewBox="0 0 24 24">${ICO[a.ic]}</svg></div><span>${esc(a.name)}</span></button>`).join('')||'<div class="faint">업적을 달성하면 고를 수 있어요</div>'}</div>
+      <div class="lbl">프로필 배너</div>${shopGrid('banner')}`;
+    B.querySelectorAll('[data-flag]').forEach(b=>b.onclick=()=>setCos({flag:b.dataset.flag}));
+    B.querySelectorAll('[data-nc]').forEach(b=>b.onclick=()=>{const o=NCOLS.find(x=>x[0]===b.dataset.nc);if(o[2]&&o[2].ach&&!(me.ach||{})[o[2].ach])return toast(`업적 「${ACH[o[2].ach].name}」 달성하면 열려요`);setCos({ncol:o[0]})});
+    B.querySelectorAll('[data-bd]').forEach(b=>b.onclick=()=>{let a=(c.badges||[]).slice();const id=b.dataset.bd;a=a.includes(id)?a.filter(x=>x!==id):[...a,id].slice(-3);setCos({badges:a})});
+    B.querySelectorAll('[data-s]').forEach(x=>x.onclick=()=>shopTap('banner',x.dataset.s));
     B.querySelectorAll('[data-av]').forEach(b=>b.onclick=()=>{const a=AV_ICONS.find(x=>x.id===b.dataset.av);if(!itemUnlocked(a))return toast(`${lockText(a)}에 해금돼요`);setCos({av:a.id})});
     B.querySelectorAll('[data-col]').forEach(b=>b.onclick=()=>setCos({avc:b.dataset.col}));
     B.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>setCos({title:b.dataset.t}));
@@ -3720,8 +3782,8 @@ async function startSearch(tc){
       q=q||{};opp=null;
       for(const k in q)if(now()-(q[k].ts||0)>10*60e3)delete q[k];
       const others=Object.entries(q).filter(([u])=>u!==uid);
-      if(others.length){others.sort((a,b)=>Math.abs(a[1].rating-me.rating)-Math.abs(b[1].rating-me.rating));opp=others[0];delete q[opp[0]];delete q[uid]}
-      else q[uid]={name:me.name,rating:me.rating,ts:now()};
+      if(others.length){const mr=rOf(me,catOf(tc.id));others.sort((a,b)=>Math.abs(a[1].rating-mr)-Math.abs(b[1].rating-mr));opp=others[0];delete q[opp[0]];delete q[uid]}
+      else q[uid]={name:me.name,rating:rOf(me,catOf(tc.id)),ts:now()};
       return q;
     });
   }catch(e){stopSearch(false);closeModal();toast('매칭 오류: '+esc(e.message));return}
@@ -4105,6 +4167,10 @@ async function applyRatings(gid,g){
   u[`users/${g.w}/current`]=null;u[`users/${g.b}/current`]=null;
   const sid=seasonId();
   u[`users/${g.w}/seasons/${sid}`]=Math.max(((W.seasons||{})[sid])||0,W.rating+dw);u[`users/${g.b}/seasons/${sid}`]=Math.max(((B.seasons||{})[sid])||0,B.rating+dbk);
+  {const k=catOf(g.tc),cw=crOf(W,k),cb=crOf(B,k),ew=elo(cw.r,cb.r,sw,cw.g),eb=elo(cb.r,cw.r,1-sw,cb.g),f={W:'w',L:'l',D:'d'};
+   u[`users/${g.w}/cr/${k}`]={...cw,r:cw.r+ew,g:cw.g+1,peak:Math.max(cw.peak,cw.r+ew),[f[rw]]:cw[f[rw]]+1};
+   u[`users/${g.b}/cr/${k}`]={...cb,r:cb.r+eb,g:cb.g+1,peak:Math.max(cb.peak,cb.r+eb),[f[rb]]:cb[f[rb]]+1};
+   u[`games/${gid}/cat`]=k;u[`games/${gid}/wCatDelta`]=ew;u[`games/${gid}/bCatDelta`]=eb}
   u[`games/${gid}/wDelta`]=dw;u[`games/${gid}/bDelta`]=dbk;
   u[`userGames/${g.w}/${gid}`]={opp:g.b,oppName:g.bName,oppRating:B.rating,color:'w',result:rw,delta:dw,after:W.rating+dw,reason:g.reason,tc:g.tc,ts:SV.TIMESTAMP};
   u[`userGames/${g.b}/${gid}`]={opp:g.w,oppName:g.wName,oppRating:W.rating,color:'b',result:rb,delta:dbk,after:B.rating+dbk,reason:g.reason,tc:g.tc,ts:SV.TIMESTAMP};
