@@ -1016,6 +1016,20 @@ html[data-theme=paper] #scrAuth input,html[data-theme=paper] #scrAuth select{bac
 html[data-theme=paper] #scrAuth .btn.pri{background:#e0472b;color:#fff}
 html[data-theme=paper] #scrAuth .faint,html[data-theme=paper] #scrAuth p{color:#a89f8e}
 html[data-theme=paper] .mark{background:#e0472b}
+
+/* ===== 초상화: 틀 없이, 배경은 스며들게 ===== */
+.porx{background:transparent!important;overflow:visible!important;border-radius:0!important;box-shadow:none!important}
+.porx.nofr::after{display:none}
+.porx img.L-bg{-webkit-mask-image:radial-gradient(ellipse 58% 56% at 50% 44%,#000 35%,rgba(0,0,0,.55) 62%,transparent 100%);mask-image:radial-gradient(ellipse 58% 56% at 50% 44%,#000 35%,rgba(0,0,0,.55) 62%,transparent 100%)}
+.porx img[class^="fr-"]{display:none}
+#scrThrone .porx img[class^="fr-"],#scrGacha .porx img[class^="fr-"],.porx.wfr img[class^="fr-"]{display:block}
+#scrThrone .porx img.L-bg,#scrGacha .porx img.L-bg{-webkit-mask-image:none;mask-image:none}
+.av.bp,.bc-p,.bsx-art,.pt,.rh-p .porx,.nextbot .porx,html[data-theme=paper] .bc-p,html[data-theme=paper] .bsx-art{background:transparent!important;box-shadow:none!important;border:0!important;border-radius:0!important;overflow:visible!important;outline:0!important}
+.pbar.turn .pt,.pbar .pt{box-shadow:none!important}
+.pbar.turn .pn{color:var(--sky-d)}
+.pbar.turn .pt .porx{filter:drop-shadow(0 0 8px color-mix(in srgb,var(--sky) 55%,transparent))}
+.rh-p.win .porx,html[data-theme=paper] .rh-p.win .porx{box-shadow:none!important;animation:none!important;filter:drop-shadow(0 6px 14px rgba(224,160,40,.45))}
+.bc-ok{background:var(--sf)!important;border:1px solid var(--ln2)}
 </style>
 </head>
 <body>
@@ -3911,7 +3925,7 @@ const POR_LAYERS=['bg','throne','cape','skin','face','crown','item','frame'];
 function portraitSVG(p,cls='por'){
   p=Object.assign({},DEF_POR,p||{});
   let h='';
-  for(const c of POR_LAYERS){const v=p[c];if(!v||v==='none')continue;const u=ARTURL[c+'_'+v];if(u)h+=`<img src="${u}" alt="" draggable="false" decoding="async" class="${c==='frame'?'fr-'+v:''}" onerror="porImgFail(this)">`}
+  for(const c of POR_LAYERS){const v=p[c];if(!v||v==='none')continue;const u=ARTURL[c+'_'+v];if(u)h+=`<img src="${u}" alt="" draggable="false" decoding="async" class="${c==='frame'?'fr-'+v:c==='bg'?'L-bg':''}" onerror="porImgFail(this)">`}
   return `<div class="porx ${cls}${p.frame==='none'?' nofr':''}">${h}</div>`;
 }
 /* ---------- 크라운 ---------- */
