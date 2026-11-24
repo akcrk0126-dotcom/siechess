@@ -637,6 +637,53 @@ table.stand{width:100%;border-collapse:collapse;font-size:13.5px}table.stand th{
 .catseg{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-bottom:8px}.catseg button{flex:1;min-width:max-content;padding:9px 12px;border-radius:12px;background:var(--sf);border:2px solid var(--ln);font-weight:800;font-size:13.5px;color:var(--cc)}.catseg button.on{background:var(--cc);color:#fff;border-color:var(--cc)}
 .bnth{position:absolute;inset:0 0 40% 0}.bnav{position:absolute;left:12%;bottom:16%}.bnav .av{width:36px;height:36px;border:3px solid #fff;font-size:14px}
 .tcs{grid-template-columns:repeat(3,1fr)!important}
+#scrAuth{justify-content:flex-start!important;overflow-y:auto;padding:0 0 30px!important;background:linear-gradient(180deg,#0d2a4a 0,#1c5aa0 330px,var(--bg) 560px)}
+#scrAuth .auth{padding:0 22px;margin-top:-6px}
+.land{position:relative;width:100%;padding:calc(18px + env(safe-area-inset-top)) 22px 18px;color:#fff;overflow:hidden;display:flex;flex-direction:column;align-items:center}
+.land-float{position:absolute;inset:0;pointer-events:none}
+.land-float i{position:absolute;width:calc(46px*var(--s));opacity:.22;animation:lfl 6s ease-in-out infinite;animation-delay:var(--d);filter:blur(.4px)}
+.land-float i img{width:100%}
+@keyframes lfl{50%{transform:translateY(-14px) rotate(8deg)}}
+.land-top{display:flex;align-items:center;gap:10px;position:relative}.land-top .mark{width:40px;height:40px;border-radius:12px;margin:0;box-shadow:0 6px 16px rgba(0,0,0,.3)}.land-top .word{font-size:22px;color:#fff}.land-top .word span{color:#8fd6ff}
+.land-h{position:relative;font-size:30px;font-weight:900;letter-spacing:-.04em;line-height:1.18;text-align:center;margin:16px 0 14px;text-shadow:0 4px 20px rgba(0,0,0,.3)}
+.land-h em{font-style:normal;background:linear-gradient(90deg,#ffe08a,#f5b300);-webkit-background-clip:text;background-clip:text;color:transparent}
+.land-board{position:relative;padding:10px;border-radius:18px;background:rgba(255,255,255,.12);backdrop-filter:blur(6px);box-shadow:0 20px 50px rgba(0,0,0,.35);animation:lbin .8s cubic-bezier(.2,1.4,.4,1)}
+@keyframes lbin{from{transform:translateY(30px) scale(.9);opacity:0}}
+.land-cap{text-align:center;font-size:12.5px;font-weight:750;margin-top:8px;opacity:.9}
+.land-feats{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:16px;width:100%;max-width:380px}
+.land-feats div{background:#fff;color:var(--tx);border-radius:14px;padding:10px 4px;text-align:center;display:flex;flex-direction:column;gap:2px;box-shadow:0 8px 20px rgba(13,40,70,.15)}
+.land-feats b{font-size:13px;font-weight:850}.land-feats span{font-size:10.5px;color:var(--tx3);font-weight:700}
+#scrAuth .auth .seg{margin-top:12px}
+.hhero{position:relative;display:flex;align-items:flex-end;gap:10px;border-radius:22px;padding:18px 16px 16px;overflow:hidden;color:#fff;box-shadow:0 14px 34px rgba(28,132,207,.35)}
+.hh-bg{position:absolute;inset:0;background:radial-gradient(120% 90% at 100% 0,#7cc8ff,transparent 60%),linear-gradient(135deg,#1c84cf,#0d3a6e)}
+.hh-hi{font-size:22px;font-weight:900;letter-spacing:-.03em}.hh-sub{font-size:13.5px;opacity:.85;margin-top:2px}
+.hh-go{margin-top:14px;background:#fff;color:var(--sky-d);font-weight:900;font-size:16px;height:50px;padding:0 18px;border-radius:14px;display:inline-flex;align-items:center;gap:8px;box-shadow:0 8px 18px rgba(0,0,0,.2);animation:hhp 2.4s ease-in-out infinite}
+.hh-go span{font-size:11.5px;font-weight:750;color:var(--tx3)}
+@keyframes hhp{50%{transform:scale(1.03)}}
+.hh-row{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}.hh-row button{background:rgba(255,255,255,.16);color:#fff;font-weight:750;font-size:12.5px;padding:7px 11px;border-radius:99px}
+.hh-row .nb{font-style:normal;margin-left:2px;padding:1px 6px;font-size:10px}
+.hh-por{position:relative;width:96px;flex:none;border-radius:14px;overflow:hidden;border:3px solid rgba(255,255,255,.85);box-shadow:0 8px 20px rgba(0,0,0,.3);transform:rotate(3deg);cursor:pointer}
+.sqcard{border:2px solid #bfe0fb;background:linear-gradient(180deg,#f3f9fe,#fff 60%)}
+.sqh{display:flex;justify-content:space-between;align-items:center}.sqh b{font-size:16px}.sqn{font-size:20px;font-weight:900;color:var(--sky-d)}
+.sqr{display:flex;align-items:center;gap:10px;margin-top:11px}.sqr .btn.sm{height:32px;padding:0 12px;font-size:12.5px;display:inline-flex;align-items:center;gap:4px;flex:none}
+.sqr.ok .dmi{border-color:var(--sky)}.sqr.got .dmi{background:var(--sky);border-color:var(--sky)}.sqr.got .dmt{color:var(--tx3);text-decoration:line-through}
+.sqr.ok .btn.pri{animation:dmp 1.6s ease-in-out infinite}
+#onb{position:fixed;inset:0;z-index:280;background:radial-gradient(120% 80% at 50% 0,#1c5aa0,#081a33 70%);color:#fff;display:flex;align-items:stretch;justify-content:center;overflow-y:auto}
+.ob-in{width:100%;max-width:420px;padding:calc(24px + env(safe-area-inset-top)) 22px 30px;display:flex;flex-direction:column;position:relative;animation:obin .45s cubic-bezier(.2,.9,.3,1)}
+@keyframes obin{from{opacity:0;transform:translateX(30px)}}
+.ob-back{position:absolute;left:14px;top:calc(16px + env(safe-area-inset-top));color:#fff;font-size:28px;width:40px;height:40px}
+.ob-dots{display:flex;gap:6px;justify-content:center;margin-bottom:22px}.ob-dots i{width:8px;height:8px;border-radius:99px;background:rgba(255,255,255,.25);transition:all .3s}.ob-dots i.on{width:26px;background:#fff}.ob-dots i.done{background:#8fd6ff}
+.ob-hero{text-align:center;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ob-logo{width:120px;height:120px;border-radius:32px;background:linear-gradient(145deg,#5ab8ff,#1c84cf);display:grid;place-items:center;box-shadow:0 0 0 10px rgba(255,255,255,.06),0 20px 50px rgba(0,0,0,.4);animation:obl 3s ease-in-out infinite}
+.ob-logo img{width:78%}@keyframes obl{50%{transform:translateY(-8px) rotate(-4deg)}}
+.ob-hero h1{font-size:30px;font-weight:900;letter-spacing:-.04em;margin-top:26px}.ob-hero p{opacity:.85;line-height:1.6;margin-top:8px;font-size:15px}
+.ob-feats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:26px;width:100%}.ob-feats div{background:rgba(255,255,255,.1);border-radius:16px;padding:12px 4px;display:flex;flex-direction:column;align-items:center;gap:4px}.ob-feats b{font-size:24px}.ob-feats span{font-size:11.5px;font-weight:750;line-height:1.3;opacity:.9}
+.ob-in h2{font-size:26px;font-weight:900;letter-spacing:-.03em;text-align:center}.ob-p{text-align:center;opacity:.8;margin-top:6px;line-height:1.55;font-size:14.5px}
+.ob-opts{display:flex;flex-direction:column;gap:10px;margin-top:24px;flex:1}.ob-opts button{display:flex;align-items:center;gap:14px;text-align:left;padding:16px;border-radius:18px;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.12);color:#fff;transition:all .2s}
+.ob-opts button.on{background:#fff;color:var(--tx);border-color:#fff;transform:scale(1.02)}.ob-opts b{font-size:17px;display:block}.ob-opts small{font-size:12.5px;opacity:.7}.ob-e{font-size:30px}
+.ob-kings{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px;flex:1;align-content:start}.ob-kings button{padding:0;display:block;background:none;line-height:0}.ob-kings .porx{border-radius:0}.ob-kings button{border-radius:18px;overflow:hidden;border:3px solid transparent;opacity:.6;transition:all .2s}.ob-kings button.on{border-color:#fff;opacity:1;transform:scale(1.03);box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.ob-gift{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}.ob-chest{width:180px;animation:chshake .5s ease-in-out infinite alternate;filter:drop-shadow(0 0 30px rgba(255,210,90,.6))}
+.ob-next{height:56px;font-size:17px;font-weight:850;margin-top:22px;border-radius:16px}.ob-next.gold{background:linear-gradient(90deg,#f5c542,#e0a020);color:#3a2600}
 .ga-dex{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
 .dx{border-radius:10px;overflow:hidden;border:2px solid var(--rc);background:var(--sf);position:relative}
 .dx .porx{border-radius:0}
@@ -737,12 +784,14 @@ ol.steps{padding-left:20px;color:var(--tx2);font-size:14px;line-height:1.8;margi
 
 <!-- AUTH -->
 <section id="scrAuth" class="screen">
+  <div class="land">
+    <div id="landFloat" class="land-float"></div>
+    <div class="land-top"><div class="mark" id="logoMark"></div><div class="word">SIE <span>Chess</span></div></div>
+    <h1 class="land-h">우리 학교 체스 <em>1등</em>은<br>누구일까?</h1>
+    <div class="land-board"><div id="landBoard"></div><div class="land-cap" id="landCap">지금 대국 중…</div></div>
+    <div class="land-feats"><div><b>랭킹전</b><span>4부문 레이팅</span></div><div><b>리그</b><span>매주 승급·강등</span></div><div><b>퍼즐 로드</b><span>9랭크 135단계</span></div><div><b>왕 꾸미기</b><span>보물상자 200+</span></div></div>
+  </div>
   <div class="auth">
-    <div class="brand">
-      <div class="mark" id="logoMark"></div>
-      <div class="word">SIE <span>Chess</span></div>
-      <p>배우고, 풀고, 겨루는 우리 학교 체스</p>
-    </div>
     <div class="seg" id="authSeg">
       <button data-m="login" class="on">로그인</button>
       <button data-m="signup">회원가입</button>
@@ -893,6 +942,7 @@ ol.steps{padding-left:20px;color:var(--tx2);font-size:14px;line-height:1.8;margi
   </div></div>
 </section>
 <div id="rankup" class="hidden"></div>
+<div id="onb" class="hidden"></div>
 <div id="overlay"><div class="modal" id="modal"></div></div>
 <div id="toasts"></div>
 <div id="drag" class="hidden"></div>
@@ -1681,6 +1731,7 @@ function medalHTML(a,on=true){return `<div class="ach ${on?'':'off'}"><div class
 /* ---------- 화면 / 모달 ---------- */
 let screenStack=['scrMain'];
 function show(id,push=true){
+  if(id==='scrAuth')setTimeout(()=>{landDeco();landStart()},50);
   document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('active',s.id===id));
   if(push&&screenStack[screenStack.length-1]!==id)screenStack.push(id);
   sizeBoard();
@@ -2139,6 +2190,7 @@ function enterMain(){
   if(me.crowns==null)saveMe({crowns:150+(me.xp||0),por:Object.assign({},DEF_POR,me.por||{})});
   applyTheme();screenStack=['scrMain'];show('scrMain',false);if(!ONLINE)resolveLeague();renderTop();goTab('home');
   checkAch();setTimeout(pumpEvents,400);
+  if(onbNeeded())setTimeout(onbOpen,350);
 }
 
 /* ================================================================
@@ -2271,7 +2323,7 @@ function pzJudge(ok){
   p.best=Math.max(p.best||0,p.r);p.seen=[...(p.seen||[]),LS.pz.i].slice(-260);
   LS.pz.delta=Math.round(p.r-before);LS.pz.before=Math.round(before);LS.pz.after=Math.round(p.r);
   LS.pz.rankUp=false;LS.pz.pres=false;
-  if(ok){p.step++;if(p.step>=PZ_STEPS){p.step=0;if(p.rank>=8){p.rank=0;p.pres=(p.pres||0)+1;LS.pz.pres=true}else{p.rank++;LS.pz.rankUp=true}}}
+  sqMark('pz');if(ok){p.step++;if(p.step>=PZ_STEPS){p.step=0;if(p.rank>=8){p.rank=0;p.pres=(p.pres||0)+1;LS.pz.pres=true}else{p.rank++;LS.pz.rankUp=true}}}
   LS.pz.state=p;
   const patch={pz:p};
   if(LS.pz.rankUp)patch.crowns=(me.crowns||0)+100*(p.rank+1);
@@ -2883,6 +2935,83 @@ function prop(k,x,y,sc,R){const t=`transform="translate(${x.toFixed(1)} ${y.toFi
   return '';
 }
 
+/* ================================================================
+   첫 화면 · 온보딩 · 새내기 퀘스트
+   ================================================================ */
+const OPERA='e2e4 e7e5 g1f3 d7d6 d2d4 c8g4 d4e5 g4f3 d1f3 d6e5 f1c4 g8f6 f3b3 d8e7 b1c3 c7c6 c1g5 b7b5 c3b5 c6b5 c4b5 b8d7 e1c1 a8d8 d1d7 d8d7 h1d1 e7e6 b5d7 f6d7 b3b8 d7b8 d1d8'.split(' ');
+let landBV=null,landT=null;
+function landStart(){
+  const host=$('#landBoard');if(!host)return;
+  if(!landBV){landBV=new BoardView(host,{interactive:false});host.style.setProperty('--bs','232px')}
+  let c=new Chess(),i=0;landBV.chess=c;landBV.render();
+  clearInterval(landT);landT=setInterval(()=>{
+    if(!$('#scrAuth').classList.contains('active')){clearInterval(landT);return}
+    if(i>=OPERA.length){i=0;c=new Chess();landBV.chess=c;landBV.render();return}
+    c.move(OPERA[i++]);landBV.render();
+    const cap=$('#landCap');if(cap)cap.textContent=i>=OPERA.length?'체크메이트! 1858년 「오페라 게임」':`${Math.ceil(i/2)}수 · ${c.hist[c.hist.length-1].san}`;
+  },1100);
+}
+function landDeco(){const el=$('#landFloat');if(!el)return;
+  const P=['K','q','N','b','R','p','Q','n'];el.innerHTML=P.map((p,i)=>`<i style="left:${[6,82,14,88,4,76,46,30][i]}%;top:${[8,6,40,46,72,78,2,90][i]}%;--d:${(i*.7).toFixed(1)}s;--s:${[1,.8,.9,1.1,.7,.9,.6,.7][i]}">${pieceSVG(p,'royalset')}</i>`).join('')}
+
+const SQ=[
+  {id:'bot',t:'봇과 한 판 두기',d:'대전 탭 · 아무 봇이나',go:()=>quickPlay()},
+  {id:'pz',t:'퍼즐 로드 1칸 올라가기',d:'레슨 탭 · 퍼즐 로드',go:()=>openPzRoad()},
+  {id:'les',t:'레슨 하나 끝내기',d:'레슨 탭',go:()=>goTab('learn')},
+  {id:'gacha',t:'보물상자 열기',d:'매일 1번 무료!',go:()=>openGacha()},
+  {id:'cos',t:'내 왕 꾸미기',d:'왕좌실에서 아이템 바꾸기',go:()=>openThrone()}];
+const sqDone=k=>!!((me.sqp||{})[k]);
+function sqMark(k){if(me&&!sqDone(k)){saveMe({['sqp/'+k]:Date.now()});setTimeout(()=>toast(`새내기 퀘스트 완료 · 홈에서 보상 받기`,2200,'lt'),700)}}
+function sqClaim(k){if(!sqDone(k)||(me.sqc||{})[k])return;let add=100;const p={['sqc/'+k]:1};
+  const all=SQ.every(q=>q.id===k||(me.sqc||{})[q.id]);if(all){add+=500}
+  p.crowns=(me.crowns||0)+add;saveMe(p);sfx('coin');buzz(20);renderTop();renderTab();
+  if(all)rankUpFX({img:`<div class="ru-trophy">${socIco('trophy')}</div>`,title:'새내기 졸업!',sub:'새내기 퀘스트를 전부 끝냈어요. 이제 진짜 승부를 시작할 시간!',reward:add,col:'#3fa9f5'});else toast(`${crownIco(14)} +${add}`,1500,'lt')}
+function sqCard(){
+  if(SQ.every(q=>(me.sqc||{})[q.id]))return '';
+  const n=SQ.filter(q=>(me.sqc||{})[q.id]).length;
+  return `<div class="card sqcard"><div class="sqh"><div><b>새내기 퀘스트</b><div class="faint">다 끝내면 보너스 ${crownIco(13)} 500</div></div><span class="num sqn">${n}/${SQ.length}</span></div>
+  <div class="pzbar sm"><i style="width:${n/SQ.length*100}%;background:linear-gradient(90deg,#5ab8ff,#1c84cf)"></i></div>
+  ${SQ.map(q=>{const d=sqDone(q.id),c=(me.sqc||{})[q.id];return `<div class="sqr ${c?'got':d?'ok':''}"><div class="dmi">${c?'<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>':''}</div><div class="grow"><div class="dmt" style="margin:0">${q.t}</div><div class="faint" style="font-size:12px">${q.d}</div></div>
+    ${c?'<span class="faint">받음</span>':d?`<button class="btn pri sm" onclick="sqClaim('${q.id}')">${crownIco(13)} 100</button>`:`<button class="btn line sm" onclick="SQ.find(x=>x.id==='${q.id}').go()">하러 가기</button>`}</div>`}).join('')}</div>`}
+
+function recBot(){const r=(me.games||0)?me.rating:({new:400,some:800,good:1200}[me.lvlPick]||800);return BOTS.slice().sort((a,b)=>Math.abs(a.elo-r)-Math.abs(b.elo-r))[0]}
+function quickPlay(){const b=recBot();openBot(b,Math.random()<.5?'w':'b',null)}
+function homeHero(){
+  const b=recBot(),h=new Date().getHours(),hi=h<6?'아직 안 잤어?':h<12?'좋은 아침':h<18?'안녕':'좋은 저녁';
+  return `<div class="hhero"><div class="hh-bg"></div><div class="grow" style="position:relative"><div class="hh-hi">${hi}, ${esc(me.name)}!</div><div class="hh-sub">${(me.games||0)+(me.wins||0)?'오늘도 한 판 어때?':'첫 판을 둬볼 시간이야'}</div>
+    <button class="btn hh-go" onclick="quickPlay()">▶ 바로 한 판 <span>vs ${b.name} ${b.elo}</span></button>
+    <div class="hh-row"><button onclick="openPzRoad()">퍼즐 로드</button><button onclick="goTab('play')">랭킹전</button><button onclick="openGacha()">보물상자${freeReady()?' <i class="nb">무료</i>':''}</button></div></div>
+    <div class="hh-por" onclick="openThrone()">${portraitSVG(porOf(me),'por')}</div></div>`}
+
+/* 온보딩 */
+let ONB={step:0,lvl:'some',king:0};
+const ONB_KINGS=[{bg:'sky',throne:'stool',crown:'paper',cape:'blue',face:'smile',item:'none',frame:'none',skin:'s2'},{bg:'hall',throne:'stool',crown:'paper',cape:'red',face:'basic',item:'none',frame:'none',skin:'s1'},{bg:'sky',throne:'stool',crown:'paper',cape:'red',face:'smile',item:'none',frame:'none',skin:'s3'},{bg:'hall',throne:'stool',crown:'paper',cape:'blue',face:'basic',item:'none',frame:'none',skin:'s4'}];
+function onbNeeded(){return me&&!me.onb&&(me.xp||0)<80&&!(me.games||0)}
+function onbOpen(){ONB={step:0,lvl:'some',king:0};$('#onb').classList.remove('hidden');onbRender()}
+function onbRender(){
+  const el=$('#onb'),st=ONB.step;const dots=`<div class="ob-dots">${[0,1,2,3].map(i=>`<i class="${i===st?'on':i<st?'done':''}"></i>`).join('')}</div>`;
+  let h='';
+  if(st===0)h=`<div class="ob-hero"><div class="ob-logo">${pieceSVG('N','royalset')}</div><h1>환영해, ${esc(me.name)}!</h1><p>여기선 학교 친구들이랑 진짜로 겨뤄.<br>이기면 레이팅이 오르고, 리그가 오르고, 왕이 화려해져.</p>
+    <div class="ob-feats"><div><b>⚔️</b><span>친구와<br>랭킹전</span></div><div><b>🧩</b><span>퍼즐<br>로드</span></div><div><b>👑</b><span>나만의<br>왕 꾸미기</span></div><div><b>🏆</b><span>클럽 ·<br>토너먼트</span></div></div></div>
+    <button class="btn pri ob-next" onclick="ONB.step=1;onbRender()">시작하기</button>`;
+  else if(st===1)h=`<h2>체스, 얼마나 해봤어?</h2><p class="ob-p">실력에 맞는 상대랑 퍼즐을 골라줄게.</p>
+    <div class="ob-opts">${[['new','🌱','처음이에요','말 움직이는 법부터 알려줘'],['some','♟️','조금 알아요','규칙은 알고, 가끔 둬봤어'],['good','🔥','자신 있어요','강한 상대로 바로 붙자']].map(([k,e,t,d])=>`<button class="${ONB.lvl===k?'on':''}" onclick="ONB.lvl='${k}';onbRender()"><span class="ob-e">${e}</span><div><b>${t}</b><small>${d}</small></div></button>`).join('')}</div>
+    <button class="btn pri ob-next" onclick="ONB.step=2;onbRender()">다음</button>`;
+  else if(st===2)h=`<h2>너의 왕을 골라</h2><p class="ob-p">대국할 때 상대가 보게 될 모습이야. 나중에 얼마든지 꾸밀 수 있어.</p>
+    <div class="ob-kings">${ONB_KINGS.map((k,i)=>`<button class="${ONB.king===i?'on':''}" onclick="ONB.king=${i};onbRender()">${portraitSVG(k,'por')}</button>`).join('')}</div>
+    <button class="btn pri ob-next" onclick="ONB.step=3;onbRender()">이 왕으로 할게</button>`;
+  else h=`<div class="ob-gift"><div class="ob-chest">${chestSVG()}</div><h2>환영 선물이 도착했어!</h2><p class="ob-p">보물상자 하나랑 ${crownIco(16)} 300 크라운.<br>상자에서 뭐가 나올까?</p></div>
+    <button class="btn pri ob-next gold" onclick="onbFinish()">상자 열기</button>`;
+  el.innerHTML=`<div class="ob-in st${st}">${st?`<button class="ob-back" onclick="ONB.step--;onbRender()">‹</button>`:''}${dots}${h}</div>`;
+  if(st===3)sfx('rare');
+}
+function onbFinish(){
+  const p={onb:Date.now(),lvlPick:ONB.lvl,crowns:(me.crowns||0)+300,por:Object.assign({},DEF_POR,ONB_KINGS[ONB.king])};
+  if(!me.pz)p.pz=Object.assign(pzState(),{r:{new:500,some:800,good:1150}[ONB.lvl]});
+  saveMe(p);$('#onb').classList.add('hidden');renderTop();renderTab();
+  openGacha();setTimeout(()=>pullUI(1,true),500);
+}
+
 /* ---------- 오늘의 미션 ---------- */
 const DM_POOL={
   L:[{id:'l1',k:'l',n:1,t:'레슨 1개 끝내기'},{id:'l2',k:'l',n:2,t:'레슨 2개 끝내기'}],
@@ -2919,7 +3048,8 @@ function renderHome(){
   const C=2*Math.PI*26,L=lgIdx(me.lg),W=weekKey(),joined=!!((me.wx||{})[W]),grp=joined?lgGroup(W,L):[],myR=grp.findIndex(u=>u.uid===uid)+1,z=lgZones(grp.length,L);
   const zoneTxt=!joined?'이번 주 XP를 얻으면 참가':myR&&myR<=z.up?'<b style="color:var(--win)">승급권</b>':myR&&myR>grp.length-z.down?'<b style="color:var(--lose)">강등권</b>':'유지권';
   $('#p-home').innerHTML=`
-  <div class="row2" style="margin:4px 2px 2px">${avHTML(me)}<div class="grow"><div style="font-size:19px;font-weight:800;letter-spacing:-.02em">${esc(me.name)}</div><div class="faint">${titleHTML(me)} ${esc(me.grade||'')}</div></div></div>
+  ${homeHero()}
+  ${sqCard()}
   <button class="card tap" onclick="showStreakInfo()">
     <div class="streak">${flameSVG(sv.doneToday)}<div class="grow"><div class="cnt num" style="color:${sv.doneToday?'var(--sky-d)':'var(--tx3)'}">${sv.c}<span style="font-size:16px;font-weight:700;color:var(--tx2);margin-left:4px">일 연속</span></div>
       <div class="muted" style="margin-top:4px">${sv.doneToday?'오늘 스트릭 완료':'오늘 하나만 하면 이어져요'}${sv.frz?` · 방어권 ${sv.frz}`:''}</div></div>
@@ -3288,10 +3418,10 @@ function thrAction(){
   bar.innerHTML=`<div class="in"><div class="grow"><b>${it.n}</b> <span style="color:${RAR[it.r].c};font-weight:700;font-size:13px">${RAR[it.r].n}</span><div class="faint">${lockA?ACH[it.ach].desc+' 필요':it.g&&!own?'왕실 보물상자 전용 아이템':own?'보유 중':'미리보기 중'}</div></div><div style="flex:1.3">${btn}</div></div>`;
   bar.classList.remove('hidden');
   if($('#thrGacha'))$('#thrGacha').onclick=()=>{thrPrev=null;openGacha()};
-  if($('#thrEquip'))$('#thrEquip').onclick=()=>{saveMe({['por/'+thrPrev.cat]:thrPrev.id});thrPrev=null;renderThrone()};
+  if($('#thrEquip'))$('#thrEquip').onclick=()=>{sqMark('cos');saveMe({['por/'+thrPrev.cat]:thrPrev.id});thrPrev=null;renderThrone()};
   if($('#thrBuy'))$('#thrBuy').onclick=()=>{
     const cat=thrPrev.cat;
-    saveMe({crowns:(me.crowns||0)-price,['inv/'+cat+'_'+it.id]:Date.now(),['por/'+cat]:it.id});
+    saveMe({crowns:(me.crowns||0)-price,['inv/'+cat+'_'+it.id]:Date.now(),['por/'+cat]:it.id});sqMark('cos');
     thrPrev=null;renderThrone();renderTop();
     if(RORD.indexOf(it.r)>=2)confetti(RORD.indexOf(it.r)>=4?200:110);
     toast(`<b>${it.n}</b> 구매 완료`,2000,'lt');
@@ -3312,6 +3442,7 @@ function gachaPool(r){const out=[];for(const cat in POR_ITEMS){if(cat==='skin')c
 function rollRarity(pity){if(pity>=PITY-1)return'l';let x=Math.random(),acc=0;for(const[r,w]of GACHA_RATE){acc+=w;if(x<acc)return r}return'c'}
 const freeReady=()=>me.freePull!==today();
 function doPull(n,free){
+  sqMark('gacha');
   const cost=free?0:n===10?PULL10:PULL1;
   if(!free&&(me.crowns||0)<cost)return null;
   let pity=me.pity||0,crowns=(me.crowns||0)-cost,refund=0;
@@ -3731,6 +3862,7 @@ function finishLesson(){
   const perfect=LS.mistakes===0,acc=LS.tasks?Math.round(LS.tasks/(LS.tasks+LS.mistakes)*100):100;
   let xp=0,label='';
   dmBump(LS.kind==='lesson'?'l':'p');
+  if(LS.kind==='lesson')sqMark('les');
   if(LS.kind==='lesson'){
     const first=!(me.lessons||{})[LS.lesson.id];
     xp=lessonXP(LS.lesson)+(perfect?10:0);if(!first)xp=Math.ceil(xp/2);
@@ -3918,7 +4050,7 @@ function afterLocalMove(){
   else{G.view=null;renderGame();talkAfterMove();if(G.chess.turn!==G.myColor)botMove()}
 }
 function finishLocal(result,reason){
-  G.over=true;G.result=result;G.reason=reason;G.view=null;renderGame();recordGame();if(G.tour)tourReport(G.tour,result);
+  sqMark('bot');G.over=true;G.result=result;G.reason=reason;G.view=null;renderGame();recordGame();if(G.tour)tourReport(G.tour,result);
   const won=result!=='1/2-1/2'&&(result==='1-0')===(G.myColor==='w');
   botSay(result==='1/2-1/2'?'draw':won?'lose':'win',true);
   if(G.chess.hist.length>=4||won){dmBump('g');if(won)dmBump('w')}
