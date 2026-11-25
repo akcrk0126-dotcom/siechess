@@ -1395,6 +1395,31 @@ function negamax(c,depth,a,b,ply){
   for(const m of ms){c.make(m);const s=-negamax(c,depth-1,-b,-a,ply+1);c.unmake(m);if(s>=b)return b;if(s>a)a=s}
   return a;
 }
+
+/* 분석: 최선수 점수 + 실제 둔 수 점수를 같은 깊이로 계산 */
+function anPos(fen,played,ms){
+  const c=new Chess(fen),L=c.legal();
+  if(!L.length)return{s:c.inCheck()?-99999:0,ps:null,best:null,d:0,only:false,legal:0};
+  L.sort((x,y)=>ordScore(y)-ordScore(x));
+  const uc=m=>sqName(m.from)+sqName(m.to)+(m.promo||'');
+  const pm=played?(L.find(m=>uc(m)===played)||L.find(m=>uc(m).slice(0,4)===played.slice(0,4))):null;
+  S_end=Date.now()+ms;S_n=0;let R=null,order=L.slice();
+  for(let d=1;d<=7;d++){
+    try{
+      let a=-1e9,bm=order[0];
+      for(const m of order){c.make(m);const s=-negamax(c,d-1,-1e9,-a,1);c.unmake(m);if(s>a){a=s;bm=m}}
+      let ps=a;if(pm&&pm!==bm){c.make(pm);ps=-negamax(c,d-1,-1e9,1e9,1);c.unmake(pm);if(ps>a)ps=a}
+      R={s:a,ps,best:uc(bm),d,only:false,legal:L.length};
+      order=[bm,...order.filter(m=>m!==bm)];
+      if(Math.abs(a)>90000)break;
+    }catch(e){if(e!==TIMEOUT)throw e;break}
+  }
+  if(!R){const m=order[0];R={s:0,ps:0,best:uc(m),d:0,only:false,legal:L.length}}
+  if(R.d>=2&&L.length>1&&Math.abs(R.s)<90000){
+    S_end=Date.now()+Math.max(120,ms*.35);const T=R.s-150;
+    try{let only=true;for(const m of order.slice(1)){c.make(m);const s=-negamax(c,R.d-2,-(T+1),-T,1);c.unmake(m);if(s>T){only=false;break}}R.only=only}catch(e){if(e!==TIMEOUT)throw e}
+  }
+  return R}
 /* opt: {depth, time(ms), noise(cp), blunder(0~1)} */
 function styleB(c,m,st,mv){
   const w=m.piece===m.piece.toUpperCase(),t=m.piece.toLowerCase(),r=m.to>>3,adv=w?7-r:r;let b=0;const chk=c.inCheck(),cs=m.flag==='k'||m.flag==='q';
@@ -2400,7 +2425,7 @@ function sizeBoard(){
   const vw=innerWidth,vh=innerHeight;
   const act=document.querySelector('.screen.active');
   const extra=act&&act.id==='scrLesson'?300:act&&act.id==='scrReview'?330:act&&act.id==='scrMode'?250:310;
-  const bs=Math.floor(Math.min(vw-16,600,vh-extra)/8)*8;
+  const bs=Math.floor(Math.min(vw-(act&&act.id==='scrReview'?60:16),600,vh-extra)/8)*8;
   document.documentElement.style.setProperty('--bs',Math.max(256,bs)+'px');
 }
 addEventListener('resize',sizeBoard);
@@ -2411,6 +2436,9 @@ try{
   const src=$('#engine').textContent+';onmessage=e=>{const m=bestMove(e.data.fen,e.data.opt);postMessage(m?{from:m.from,to:m.to,promo:m.promo||null}:null)};';
   worker=new Worker(URL.createObjectURL(new Blob([src],{type:'text/javascript'})));
 }catch(e){worker=null}
+let ANW=null;
+function anPool(){if(ANW)return ANW;ANW=[];try{const src=$('#engine').textContent+';onmessage=e=>{const d=e.data;postMessage({i:d.i,r:anPos(d.fen,d.played,d.ms)})};';const url=URL.createObjectURL(new Blob([src],{type:'text/javascript'}));
+  const n=Math.max(2,Math.min(4,(navigator.hardwareConcurrency||4)-1));for(let k=0;k<n;k++)ANW.push(new Worker(url))}catch(e){ANW=[]}return ANW}
 function think(fen,opt){
   const local=()=>{const m=bestMove(fen,opt);return m?{from:m.from,to:m.to,promo:m.promo||null}:null};
   return new Promise(res=>{
@@ -2795,46 +2823,51 @@ function openReview(id){
   renderReview();analyzeGame();
 }
 async function analyzeGame(){
-  const R=REV,h=R.h,c=new Chess(h.fen0||START_FEN);c.startTurn=c.turn;
-  const pos=[],N=h.moves.length;
-  for(let i=0;i<=N;i++){
-    if(REV!==R)return;
-    const st=c.status(),r=st.over?{s:st.result==='1/2-1/2'?0:-99999,all:[],m:null}:anRoot(c,3,i<6?160:300);
-    pos.push({s:r.s,best:r.m?uciOf(r.m):null,bestSan:r.m?sanOf(c,r.m):null,all:r.all.map(x=>({u:uciOf(x.m),s:x.s})),turn:c.turn,legal:c.legal().length});
-    if(i<N){c.move(h.moves[i])}
-    R.prog=(i+1)/(N+1);if(i%2===0){renderRvProgress()}
-    await new Promise(r=>setTimeout(r,0));
-  }
+  const R=REV,h=R.h,c=new Chess(h.fen0||START_FEN);
+  const N=h.moves.length,jobs=[];
+  for(let i=0;i<=N;i++){const st=c.status();jobs.push({i,fen:c.fen(),played:i<N?h.moves[i]:null,over:st.over,res:st.result,chk:c.inCheck(),turn:c.turn});if(i<N)c.move(h.moves[i])}
+  const out=new Array(N+1);let done=0;
+  const msOf=i=>i<8?450:1100;
+  const fin=(i,r)=>{out[i]=r;done++;R.prog=done/(N+1);renderRvProgress()};
+  jobs.filter(j=>j.over).forEach(j=>fin(j.i,{s:j.res==='1/2-1/2'?0:-99999,ps:null,best:null,d:0,only:false,legal:0}));
+  const todo=jobs.filter(j=>!j.over);
+  const pool=anPool();
+  if(pool.length){
+    await new Promise(res=>{let next=0;const total=todo.length;let got=0;if(!total)return res();
+      const feed=w=>{if(REV!==R){return res()}if(next>=total)return;const j=todo[next++];w.onmessage=e=>{fin(e.data.i,e.data.r);got++;if(got>=total)res();else feed(w)};w.postMessage({i:j.i,fen:j.fen,played:j.played,ms:msOf(j.i)})};
+      pool.forEach(feed)});
+  }else{for(const j of todo){if(REV!==R)return;fin(j.i,anPos(j.fen,j.played,msOf(j.i)));await new Promise(r=>setTimeout(r,0))}}
   if(REV!==R)return;
+  const pos=jobs.map(j=>{const r=out[j.i]||{s:0,ps:0,best:null,legal:1};let bestSan=null;if(r.best){const cc=new Chess(j.fen);const m=cc.move(r.best);bestSan=m?m.san:null}return Object.assign({},r,{turn:j.turn,bestSan})});
   R.pos=pos;R.res=classify(h,pos);renderReview();
 }
 function sanOf(c,m){const cc=new Chess(c.fen());const r=cc.move({from:m.from,to:m.to,promo:m.promo});return cc.hist.length?cc.hist[cc.hist.length-1].san:uciOf(m)}
 function classify(h,pos){
-  const c=new Chess(h.fen0||START_FEN),out=[];let prevBad=false;
+  const c=new Chess(h.fen0||START_FEN),out=[];let prevBad=false;const std=(h.fen0||START_FEN)===START_FEN;
   for(let i=0;i<h.moves.length;i++){
-    const P=pos[i],mover=P.turn,u=h.moves[i];
-    const mv=P.all.find(x=>x.u===u),bestS=P.all.length?P.all[0].s:0;
-    const playedS=mv?mv.s:-(pos[i+1]?pos[i+1].s:0);
-    const wb=winP(cpOf(bestS)),wa=winP(cpOf(playedS)),loss=Math.max(0,wb-wa);
-    const second=P.all[1]?P.all[1].s:null;
-    const m=c.legal().find(x=>uciOf(x)===u)||c.legal().find(x=>uciOf(x).slice(0,4)===u.slice(0,4));
+    const P=pos[i],mover=P.turn,u=h.moves[i],bestS=P.s;
+    const playedS=P.ps!=null?P.ps:(pos[i+1]?-pos[i+1].s:bestS);
+    const wb=winP(cpOf(bestS)),wa=winP(cpOf(playedS));let loss=Math.max(0,wb-wa);
+    const isBest=u===P.best||(P.best&&u.slice(0,4)===P.best.slice(0,4));if(isBest)loss=0;
+    const L=c.legal(),m=L.find(x=>uciOf(x)===u)||L.find(x=>uciOf(x).slice(0,4)===u.slice(0,4));
+    const lm=c.hist[c.hist.length-1],recap=m&&m.cap&&lm&&lm.cap&&lm.to===m.to;
     let k;
     if(P.legal===1)k='forced';
-    else if(i<10&&(h.fen0||START_FEN)===START_FEN&&loss<3.5)k='book';
-    else if(loss<1.2||u===P.best){
+    else if(i<12&&std&&loss<6)k='book';
+    else if(isBest||loss<2){
       k='best';
-      if(second!=null&&winP(cpOf(bestS))-winP(cpOf(second))>18&&wa>35&&wa<97)k='great';
-      if(m&&isSac(c,m)&&wa>40&&wb<97)k='brill';
+      if(isBest&&P.only&&!(m&&m.cap)&&!recap&&!c.inCheck()&&wa>30&&wa<95)k='great';
+      if(isBest&&m&&isSac(c,m)&&wa>40&&wb<97)k='brill';
     }
-    else if(loss<4)k='exc';else if(loss<9)k='good';else if(loss<18)k='inacc';else if(loss<30)k='mist';else k='blund';
-    if((k==='mist'||k==='blund'||k==='inacc')&&prevBad&&loss>=12)k='miss';
+    else if(loss<5)k='exc';else if(loss<10)k='good';else if(loss<20)k='inacc';else if(loss<33)k='mist';else k='blund';
+    if((k==='mist'||k==='blund')&&prevBad&&wb>60)k='miss';
     out.push({k,loss,before:P.s,after:pos[i+1]?-pos[i+1].s:-playedS,bestU:P.best,bestSan:P.bestSan,mover,san:null,wEval:mover==='w'?cpOf(bestS):-cpOf(bestS)});
     prevBad=k==='mist'||k==='blund';
     c.move(u);out[i].san=c.hist[c.hist.length-1].san;
   }
   const acc={w:[],b:[]};out.forEach(o=>acc[o.mover].push(Math.max(0,Math.min(100,103.1668*Math.exp(-0.04354*o.loss)-3.1669))));
   const A=s=>s.length?Math.round(s.reduce((a,b)=>a+b,0)/s.length*10)/10:0;
-  const ev=pos.map((p,i)=>{const s=cpOf(p.s);return p.turn==='w'?s:-s});
+  const ev=pos.map(p=>{const s=cpOf(p.s);return p.turn==='w'?s:-s});
   return{mv:out,acc:{w:A(acc.w),b:A(acc.b)},ev};
 }
 function isSac(c,m){
